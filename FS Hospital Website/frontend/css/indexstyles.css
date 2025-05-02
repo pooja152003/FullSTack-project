@@ -1,0 +1,150 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.main-nav-bar {
+  background-color: #5cc65e;
+  padding: 20px 0;
+}
+
+.nav-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+  font-weight: bold;
+  font-size: 14px;
+  color: white;
+}
+
+.nav-item {
+  position: relative;
+  cursor: pointer;
+}
+
+.nav-item span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: white;
+  position: relative;
+}
+
+.nav-item svg {
+  margin-left: 5px; /* Add this for spacing between text and arrow */
+  vertical-align: middle; /* Ensures the arrow stays aligned with the text */
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  background-color: #fff;
+  min-width: 180px;
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.2);
+  color: black;
+  z-index: 999;
+}
+
+.dropdown-content a {
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+  color: #464545;
+}
+
+.dropdown-content a:hover {
+  background-color: #f0f0f0;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.hero {
+  height: 300px; /* Adjust as needed */
+  overflow: hidden;
+}
+
+.hero-full-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.search-bar {
+  padding: 20px;
+  background: #e6f0fa;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.search-bar input, .search-bar button {
+  padding: 10px;
+  font-size: 16px;
+}
+
+.search-bar button {
+  background: #00b388;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+#chat-icon {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #00b388;
+  color: white;
+  padding: 15px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+#chatbox {
+  display: none;
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  width: 300px;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+#chat-header {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+#chat-body {
+  max-height: 150px;
+  overflow-y: auto;
+  margin-bottom: 10px;
+}
+
+.bot-message {
+  background: #f0f0f0;
+  padding: 8px;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+#user-input {
+  width: 100%;
+  padding: 8px;
+}
+
+footer {
+  background: #f1f1f1;
+  text-align: center;
+  padding: 10px;
+  font-size: 12px;
+}
