@@ -14,6 +14,26 @@
             overflow:hidden;
             font-family: Arial, sans-serif;
         }
+
+        .form {
+            width: 100%;  /* Full width on larger screens */
+            max-width: 500px; /* Optional: Max width for the form */
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 8px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            margin: 20px auto; /* Centered with auto margins */
+        }
+
+        /* Adjustments for smaller screen sizes */
+        @media screen and (max-width: 768px) {
+            .form {
+                width: 80%;  /* Increase width to 80% on smaller screens */
+                margin-left: auto; 
+                margin-right: auto;
+            }
+        }
+        
     
         .form h2 {
             text-align: center;
@@ -62,6 +82,17 @@
         #checkAvailability:hover {
             background-color: #507bda;
         }
+        .content {
+            padding: 5px;
+            color: #034058;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 50px;
+            max-width: 1200px;
+            margin: auto;
+            box-sizing: border-box;
+        }
+        
 
     </style>
 </head>
@@ -85,10 +116,7 @@
 
     </div> 
     <div class="content">
-        <h1>Book an <br><span>Appointment</span> <br>Online !</h1>
-
-
-        <button class="cn"><a href="#">Book Now</a></button>
+        <h1>Book an <br><span>Appointment</span> <br>Online Now !!!</h1>
 
         <form id="appointmentForm" class="form">
             <h2>Doctor Appointment</h2>
