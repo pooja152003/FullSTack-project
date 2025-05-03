@@ -9,9 +9,9 @@
             padding: 0;
         }
         html, body {
-            width: 100vw;
-            height: 100vh;
-            overflow: hidden;
+            height: 100%;
+            width: 100%;
+            overflow:hidden;
             font-family: Arial, sans-serif;
         }
     
@@ -40,6 +40,12 @@
             border-radius: 4px;
             
         }
+        @media screen and (max-width: 768px) {
+    .container {
+        flex-direction: column; /* Stack elements vertically */
+        text-align: center;
+    }
+}
         #checkAvailability {
             display: block;
             width: 100%;
@@ -63,8 +69,11 @@
 <div class="main" style="background: url('images/login4img.jpg') no-repeat center center; background-size: cover;">
     <div class="navbar">
         <div class="icon">
-            <h2 class="logo">OasIs<br>medicity</h2>
-        </div>
+            <h2 class="logo">
+                <span style="color: #034058; font-family: Georgia, serif;">OasIs</span><br>
+                <span style="color: teal; font-family: Georgia, serif;">Medicity</span>
+              </h2>
+                      </div>
 
         <div class="menu">
             <ul>
@@ -72,11 +81,6 @@
                 <li><a href="about.html">ABOUT</a></li>
                 <li><a href="contact.html">CONTACT</a></li>
             </ul>
-        </div>
-
-        <div class="search">
-            <input class="srch" type="search" name="" placeholder="Type To text">
-            <a href="#"> <button class="btn">Search</button></a>
         </div>
 
     </div> 
@@ -91,22 +95,21 @@
             <div class="form-group">
                 <select id="doctorSelect" required>
                     <option value="">-- Select a Doctor --</option>
-                    <option value="dr_anderson">Dr. Laura Anderson - Dermatologist</option>
-                    <option value="dr_martinez">Dr. Carlos Martinez - General Physician</option>
-                    <option value="dr_kumar">Dr. Priya Kumar - Gynecologist</option>
-                    <option value="dr_lee">Dr. Kevin Lee - ENT Specialist</option>
-                    <option value="dr_patel">Dr. Nisha Patel - Ophthalmologist</option>
-                    <option value="dr_thompson">Dr. James Thompson - Psychiatrist</option>
-                    <option value="dr_chen">Dr. Angela Chen - Endocrinologist</option>
-                    <option value="dr_nguyen">Dr. Minh Nguyen - Gastroenterologist</option>
-                    <option value="dr_rivera">Dr. Sofia Rivera - Pulmonologist</option>
-                    <option value="dr_das">Dr. Arjun Das - Urologist</option>
-                    <option value="dr_ali">Dr. Ayesha Ali - Oncologist</option>
-                    <option value="dr_wilson">Dr. Robert Wilson - Rheumatologist</option>
+                    <option value="dr_anderson">Dr. Laura Anderson - Cardiologist</option>
                     <option value="dr_johnson">Dr. Sarah Johnson - Cardiologist</option>
                     <option value="dr_smith">Dr. Michael Smith - Neurologist</option>
-                    <option value="dr_williams">Dr. Emily Williams - Pediatrician</option>
                     <option value="dr_brown">Dr. David Brown - Orthopedic Surgeon</option>
+                    <option value="dr_kumar">Dr. Priya Kumar - Gynecologist</option>
+                    <option value="dr_patel">Dr. Nisha Patel - Ophthalmologist</option>
+                    <option value="dr_williams">Dr. Emily Williams - Pediatrician</option>
+                    <option value="dr_lee">Dr. Kevin Lee - ENT Specialist</option>
+                    <option value="dr_nguyen">Dr. Minh Nguyen - Gastroenterologist</option>
+                    <option value="dr_chen">Dr. Angela Chen - Pediatrician</option>
+                    <option value="dr_thompson">Dr. James Thompson - Psychiatrist</option>
+                    <option value="dr_das">Dr. Arjun Das - Urologist</option>
+                    <option value="dr_martinez">Dr. Carlos Martinez - Neurologist</option>
+                    <option value="dr_wilson">Dr. Robert Wilson - Genaral Physician</option>
+                    
                 </select>
             </div>
             <div class="doctor-info" id="doctorInfo">
@@ -158,8 +161,6 @@
     </div>
 </div>
 
-<div class="footer">
-    <p>© 2023 OasIs Medicity. All rights reserved.</p>
     <script>
         // Function to show the popup
         function showPopup(message) {
