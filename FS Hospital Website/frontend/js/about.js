@@ -1,16 +1,13 @@
-let currentSlide = 0;
-const slides = document.querySelectorAll(".slide");
+const menuBtn = document.getElementById("menu-btn");
+const navLinks = document.getElementById("nav-links");
 
-function changeSlide() {
-  // Remove the active class from the current slide
-  slides[currentSlide].classList.remove("active");
+menuBtn.addEventListener("click", () => {
+  navLinks.classList.toggle("open");
+});
 
-  // Move to the next slide, wrapping around when reaching the last slide
-  currentSlide = (currentSlide + 1) % slides.length;
-
-  // Add the active class to the next slide
-  slides[currentSlide].classList.add("active");
-}
-
-// Change slide every 4 seconds
-setInterval(changeSlide, 4000);
+// ScrollReveal animation (optional)
+ScrollReveal().reveal(".about-content", {
+  duration: 1000,
+  origin: "bottom",
+  distance: "50px",
+});
