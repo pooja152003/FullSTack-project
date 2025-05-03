@@ -33,69 +33,70 @@
 
                 <button class="cn"><a href="#">Book Now</a></button>
 
-                 <form id="appointmentForm">
-            <div class="form-group">
-                <label for="doctorSelect">Select Doctor</label>
-                <select id="doctorSelect" required>
-                    <option value="">-- Select a Doctor --</option>
-                    <option value="dr_johnson">Dr. Sarah Johnson - Cardiologist</option>
-                    <option value="dr_smith">Dr. Michael Smith - Neurologist</option>
-                    <option value="dr_williams">Dr. Emily Williams - Pediatrician</option>
-                    <option value="dr_brown">Dr. David Brown - Orthopedic Surgeon</option>
-                </select>
-            </div>
-            
-            <div class="doctor-info" id="doctorInfo">
-                <!-- Doctor info will be populated by JavaScript -->
-            </div>
-            
-            <div class="form-group">
-                <label for="patientName">Full Name</label>
-                <input type="text" id="patientName" required placeholder="Enter your full name">
-            </div>
-            
-            <div class="form-group">
-                <label for="patientEmail">Email</label>
-                <input type="email" id="patientEmail" required placeholder="Enter your email">
-            </div>
-            
-            <div class="form-group">
-                <label for="patientPhone">Phone Number</label>
-                <input type="tel" id="patientPhone" required placeholder="Enter your phone number">
-            </div>
-            
-            <div class="form-group">
-                <label for="appointmentDate">Appointment Date</label>
-                <input type="date" id="appointmentDate" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="appointmentTime">Available Time Slots</label>
-                <div class="time-slots" id="timeSlots">
-                    <!-- Time slots will be populated by JavaScript -->
-                </div>
-            </div>
-            
-            <div class="form-group">
-                <label for="reason">Reason for Visit</label>
-                <select id="reason" required>
-                    <option value="">Select a reason</option>
-                    <option value="consultation">Consultation</option>
-                    <option value="follow-up">Follow-up Visit</option>
-                    <option value="checkup">Routine Checkup</option>
-                    <option value="emergency">Emergency</option>
-                    <option value="other">Other</option>
-                </select>
-            </div>
-            
-            <button type="submit" id="checkAvailability">Check Availability</button>
-            
-            <div id="availabilityStatus" class="availability"></div>
-            
-            <button type="button" id="bookAppointment" style="display: none; margin-top: 15px;">Confirm Appointment</button>
-        </form>
-    </div>
+                <div class="form">
+                    <h2>Doctor Appointment</h2>
+                    <div class="form-group">
+                        <label for="doctorSelect">Select Doctor</label>
+                        <select id="doctorSelect" required>
+                            <option value="">-- Select a Doctor --</option>
+                            <option value="dr_johnson">Dr. Sarah Johnson - Cardiologist</option>
+                            <option value="dr_smith">Dr. Michael Smith - Neurologist</option>
+                            <option value="dr_williams">Dr. Emily Williams - Pediatrician</option>
+                            <option value="dr_brown">Dr. David Brown - Orthopedic Surgeon</option>
+                        </select>
+                    </div>
+                    <div class="doctor-info" id="doctorInfo">
+                        <!-- Doctor info will be populated by JavaScript -->
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="patientName">Full Name</label>
+                        <input type="text" id="patientName" required placeholder="Enter your full name">
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="patientEmail">Email</label>
+                        <input type="email" id="patientEmail" required placeholder="Enter your email">
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="patientPhone">Phone Number</label>
+                        <input type="tel" id="patientPhone" required placeholder="Enter your phone number">
+                    </div>
 
-    <script src="appointments.js"></script>
+                    <div class="form-group">
+                        <label for="appointmentDate">Appointment Date</label>
+                        <input type="date" id="appointmentDate" required>
+                    </div>
+    
+                    <div class="form-group">
+                        <label for="appointmentTime">Available Time Slots</label>
+                        <div class="time-slots" id="timeSlots">
+                            <!-- Time slots will be populated by JavaScript -->
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="reason">Reason for Visit</label>
+                        <select id="reason" required>
+                            <option value="">Select a reason</option>
+                            <option value="consultation">Consultation</option>
+                            <option value="follow-up">Follow-up Visit</option>
+                            <option value="checkup">Routine Checkup</option>
+                            <option value="emergency">Emergency</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+    
+                    <button type="submit" id="checkAvailability">Check Availability</button>
+                </form>
+            </div>
+        </div>
+
+                </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+    <script src="appointments.jss"></script>
 </body>
 </html>

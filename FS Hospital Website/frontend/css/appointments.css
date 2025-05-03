@@ -1,348 +1,178 @@
-*{
+/* loginstyle.css */
+
+/* Reset some defaults */
+body, html {
     margin: 0;
     padding: 0;
-}
-
-.main{
-    width: 100%;
-    background: 
-        linear-gradient(to top, rgba(246, 244, 244, 0.5) 50%, rgba(0, 0, 0, 0.5) 50%),
-        url("images/login_img.jpg") no-repeat center center;
-    background-position: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-size: cover;
-    height: 100vh;
-
 }
 
-.navbar{
-    width: 1200px;
-    height: 75px;
-    margin: auto;
+
+.main {
+    width: 100%;
+    min-height: 100vh; /* changed from height: 100vh */
+    background-size: cover;
+    position: relative;
+    padding-bottom: 50px; /* optional padding at bottom */
 }
 
-.icon{
-    width: 200px;
-    float: left;
-    height: 70px;
-}
 
-.logo{
-    color: #f8fbf8;
-    font-size: 35px;
-    font-family: Arial;
-    padding-left: 20px;
-    float: left;
-    padding-top: 10px;
-    margin-top: 5px
-}
-
-.menu{
-    width: 400px;
-    float: left;
-    height: 70px;
-}
-
-ul{
-    float: left;
+.navbar {
+    width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.icon .logo {
+    font-size: 30px;
+    color: #fff;
+    line-height: 1.2;
+    font-weight: bold;
+}
+
+.menu ul {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+}
+
+.menu ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.menu ul li a:hover {
+    color: #00e6e6;
+}
+
+.search {
+    display: flex;
     align-items: center;
 }
 
-ul li{
-    list-style: none;
-    margin-left: 62px;
-    margin-top: 27px;
-    font-size: 14px;
+.srch {
+    padding: 5px 10px;
+    border: none;
+    outline: none;
+    border-radius: 3px;
 }
 
-ul li a{
-    text-decoration: none;
-    color: #4e758d;
-    font-family: Arial;
-    font-weight: bold;
-    transition: 0.4s ease-in-out;
-}
-
-ul li a:hover{
-    color: #021f3b;
-}
-
-.search{
-    width: 330px;
-    float: left;
-    margin-left: 270px;
-}
-
-.srch{
-    font-family: 'Times New Roman';
-    width: 200px;
-    height: 40px;
-    background: transparent;
-    border: 1px solid #168f9f;
-    margin-top: 13px;
-    color: #fff;
-    border-right: none;
-    font-size: 16px;
-    float: left;
-    padding: 10px;
-    border-bottom-left-radius: 5px;
-    border-top-left-radius: 5px;
-}
-
-.btn{
-    width: 100px;
-    height: 40px;
-    background: #2b8090;
-    border: 2px solid #168f9f;
-    margin-top: 13px;
-    color: #fff;
-    font-size: 15px;
-    border-bottom-right-radius: 5px;
-    border-bottom-right-radius: 5px;
-    transition: 0.2s ease;
+.btn {
+    padding: 6px 12px;
+    margin-left: 10px;
+    background: #00e6e6;
+    border: none;
     cursor: pointer;
-}
-.btn:hover{
-    color: #031b45;
-}
-
-.btn:focus{
-    outline: none;
-}
-
-.srch:focus{
-    outline: none;
+    border-radius: 3px;
 }
 
 .content {
-    width: 1200px;
-    height: auto;
-    margin: auto;
-    color: #052457;
-    position: relative;
-    margin-right: -60px;  /* Move content to the right by 40px */
-    text-align: left;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+    align-items: flex-start;
 }
 
 
-.content h1{
-    font-family: 'Times New Roman';
-    font-size: 50px;
-    padding-left: 20px;
-    margin-top: 9%;
-    letter-spacing: 2px;
+.content h1 {
+    font-size: 40px;
+    margin-bottom: 20px;
 }
 
-.content .cn {
-    width: 180px;
-    height: 45px;
-    background: #034058;
-    border: none;
-    margin-bottom: 10px;
-    margin-left: 20px;
-    font-size: 20px;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: .4s ease;
-    color: #fff;
-    text-align: center;
-    line-height: 45px; 
+.content h1 span {
+    color: #00e6e6;
 }
 
-.content .cn a {
+.cn a {
     text-decoration: none;
-    color: #fff; 
+    color: white;
 }
 
-.cn:hover {
-    background-color: #2b8090;
+.cn {
+    padding: 10px 25px;
+    background: #00e6e6;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 20px;
 }
 
-
-.content span{
-    color: #5c8daa;
-    font-size: 65px
-}
-
-.form{
-    width: 250px;
-    height: 380px;
-    background: linear-gradient(to top, rgba(193, 223, 232, 0.8)50%,rgba(192, 216, 224, 0.8)50%);
-    position: absolute;
-    top: 20px; /* Adjust the top position as needed */
-    left: 600px;
-    transform: translate(0%,-5%);
-    border-radius: 10px;
+.form {
+    background: rgba(255, 255, 255, 0.95);
     padding: 25px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 450px;
+    box-sizing: border-box;
+    color: #333;
 }
 
-.form h2{
-    width: 220px;
-    font-family: sans-serif;
+.content {
+    padding: 50px;
+    color: white;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+    max-width: 1200px;
+    margin: auto;
+    box-sizing: border-box;
+}
+
+
+.form h2 {
     text-align: center;
-    color: #1e538d;
-    font-size: 22px;
-    background-color: #ebe4e4;
-    border-radius: 10px;
-    margin: 2px;
-    padding: 8px;
-}
-
-.form input{
-    width: 240px;
-    height: 35px;
-    background: transparent;
-    border-bottom: 1px solid #699cab;
-    border-top: none;
-    border-right: none;
-    border-left: none;
-    color: #5b8ba1;
-    font-size: 15px;
-    letter-spacing: 1px;
-    margin-top: 30px;
-    font-family: sans-serif;
-}
-
-.form input:focus{
-    outline: none;
-}
-
-::placeholder{
-    color: #6e96ac;
-    font-family: Arial;
+    margin-bottom: 20px;
 }
 
 .form-group {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
-label {
+.form-group label {
     display: block;
-    margin-bottom: 8px;
-    font-weight: bold;
-    color: #2c3e50;
-}
-
-input, select {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 16px;
-    transition: border 0.3s;
-}
-
-input:focus, select:focus {
-    border-color: #3498db;
-    outline: none;
-}
-
-button {
-    background-color: #3498db;
-    color: white;
-    border: none;
-    padding: 12px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    width: 100%;
-    transition: background-color 0.3s;
-}
-
-button:hover {
-    background-color: #2980b9;
-}
-
-.availability {
-    margin-top: 20px;
-    padding: 15px;
-    border-radius: 5px;
-    display: none;
-}
-
-.available {
-    background-color: #d4edda;
-    color: #155724;
-    border: 1px solid #c3e6cb;
-}
-
-.not-available {
-    background-color: #f8d7da;
-    color: #721c24;
-    border: 1px solid #f5c6cb;
-}
-
-.doctor-info {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #eee;
-}
-
-.doctor-info img {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-right: 20px;
-}
-
-.doctor-details h3 {
-    color: #2c3e50;
+    font-size: 14px;
     margin-bottom: 5px;
 }
 
-.doctor-details p {
-    color: #7f8c8d;
-    font-size: 14px;
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
 
 .time-slots {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    margin-top: 15px;
+    margin-top: 5px;
 }
 
-.time-slot {
-    padding: 8px 12px;
-    background-color: #f1f1f1;
-    border-radius: 5px;
+/* Example of a basic slot style (if used via JS later) */
+.time-slots button {
+    padding: 6px 10px;
+    border: 1px solid #00e6e6;
+    background-color: white;
+    color: #00e6e6;
+    border-radius: 4px;
     cursor: pointer;
-    transition: all 0.3s;
 }
 
-.time-slot:hover {
-    background-color: #3498db;
+#checkAvailability {
+    background: #00e6e6;
     color: white;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
 }
-
-.time-slot.selected {
-    background-color: #3498db;
-    color: white;
-}
-
-.time-slot.booked {
-    background-color: #e74c3c;
-    color: white;
-    cursor: not-allowed;
-}
-
-@media (max-width: 600px) {
-    .container {
-        padding: 20px;
-    }
-
-    .doctor-info {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .doctor-info img {
-        margin-right: 0;
-        margin-bottom: 15px;
-    }
-}
-
