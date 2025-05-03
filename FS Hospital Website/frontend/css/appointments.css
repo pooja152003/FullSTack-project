@@ -95,23 +95,31 @@ body, html {
 }
 
 .cn {
-    padding: 10px 25px;
+    display: block;
+    text-align: center;
+    width: fit-content;
+    padding: 12px 25px;
     background: #00e6e6;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    margin-bottom: 20px;
+    margin: 20px auto;
 }
 
 .form {
     background: rgba(255, 255, 255, 0.95);
     padding: 25px;
     border-radius: 8px;
-    width: 100%;
+    width: 500px;
     max-width: 450px;
     box-sizing: border-box;
     color: #333;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column; /* Keep everything aligned */
+    align-items: center; /* Centers elements */
 }
+
 
 .content {
     padding: 50px;
@@ -143,11 +151,10 @@ body, html {
 .form-group input,
 .form-group select {
     width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
+    padding: 10px;
+    border-radius: 5px;
 }
+
 
 .time-slots {
     display: flex;
