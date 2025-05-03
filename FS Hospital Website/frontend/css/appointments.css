@@ -1,6 +1,7 @@
 /* loginstyle.css */
 
 /* Reset some defaults */
+
 body, html {
     margin: 0;
     padding: 0;
@@ -29,7 +30,7 @@ body, html {
 
 .icon .logo {
     font-size: 30px;
-    color: #fff;
+    color: #190f0f;
     line-height: 1.2;
     font-weight: bold;
 }
@@ -133,29 +134,6 @@ body, html {
 }
 
 
-.form h2 {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.form-group {
-    margin-bottom: 15px;
-}
-
-.form-group label {
-    display: block;
-    font-size: 14px;
-    margin-bottom: 5px;
-}
-
-.form-group input,
-.form-group select {
-    width: 100%;
-    padding: 10px;
-    border-radius: 5px;
-}
-
-
 .time-slots {
     display: flex;
     flex-wrap: wrap;
@@ -171,15 +149,4 @@ body, html {
     color: #00e6e6;
     border-radius: 4px;
     cursor: pointer;
-}
-
-#checkAvailability {
-    background: #00e6e6;
-    color: white;
-    border: none;
-    padding: 10px;
-    width: 100%;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-top: 10px;
 }
