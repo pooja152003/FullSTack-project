@@ -1,17 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Medical Departments</title>
-    <link rel="stylesheet" href="department.css">
+  <meta charset="UTF-8" />
+  <title>Test Departments</title>
+  <style>
+    body {
+      font-family: Arial;
+      background: #f4f4f4;
+    }
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 30px;
+      text-align: center;
+    }
+    .departments-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .department-card {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    .department-icon {
+      width: 60px;
+      height: 60px;
+    }
+    .department-title {
+      font-size: 20px;
+      margin: 10px 0;
+      color: #0077b6;
+    }
+    .department-description {
+      color: #555;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1 class="page-title">Our Medical Departments</h1>
-        <div class="departments-grid" id="departmentsGrid">
-            <!-- Cards will be injected by JavaScript -->
-        </div>
-    </div>
-    <script src="department.js"></script>
+  <div class="container">
+    <h1>Our Medical Departments</h1>
+    <div class="departments-grid" id="departmentsGrid"></div>
+  </div>
+  <script>
+    const departments = [
+      { name: "Cardiology", description: "Heart and cardiovascular system.", icon: "https://img.icons8.com/color/96/heart-with-pulse.png" },
+      { name: "Neurology", description: "Brain and nervous system.", icon: "https://img.icons8.com/color/96/brain.png" },
+      { name: "Orthopedics", description: "Bones and muscles.", icon: "https://img.icons8.com/color/96/bone.png" },
+      { name: "Pediatrics", description: "Child healthcare.", icon: "https://img.icons8.com/color/96/baby.png" },
+      { name: "Dermatology", description: "Skin, hair, and nails.", icon: "https://img.icons8.com/color/96/skin.png" },
+      { name: "Radiology", description: "Medical imaging.", icon: "https://img.icons8.com/color/96/x-ray.png" },
+      { name: "ENT", description: "Ear, nose, and throat.", icon: "https://img.icons8.com/color/96/ear.png" },
+      { name: "Gastroenterology", description: "Digestive system.", icon: "https://img.icons8.com/color/96/stomach.png" },
+      { name: "Urology", description: "Urinary tract and male organs.", icon: "https://img.icons8.com/color/96/kidney.png" }
+    ];
+    const grid = document.getElementById('departmentsGrid');
+    departments.forEach(dept => {
+      const card = document.createElement('div');
+      card.className = 'department-card';
+      card.innerHTML = `
+        <img src="${dept.icon}" class="department-icon">
+        <div class="department-title">${dept.name}</div>
+        <div class="department-description">${dept.description}</div>
+      `;
+      grid.appendChild(card);
+    });
+  </script>
 </body>
 </html>
