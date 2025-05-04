@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Oasis Medicity - Home</title>
     <link rel="stylesheet" href="css/indexstyles.css">
     
@@ -15,19 +17,23 @@
 </head>
 
 <body>
-    <div class="banner">
-        <div class="navbar">
-            <div class="icon">
-                <h2 class="logo">Oasis<br>Medicity</h2>
-            </div>                
-            <ul>
-                <li><a href="contact.html">CONTACT</a></li>
-                <li><a href="about.html">ABOUT</a></li>
-                <li><a href="faq.html">FAQ</a></li>
-                <li><a href="register.html">LOGIN</a></li>
-            </ul>
-        </div>
-
+  <div class="banner">
+  <div class="navbar">
+    <div class="logo">
+      <img src="images/logo.jpg" alt="Oasis Logo">
+      <div class="logo-text">
+        <div class="title1">OasIs</div>
+        <div class="title2">Medicity</div>
+      </div>
+    </div>
+    <ul class="nav-links">
+      <li><a href="contact.html">CONTACT</a></li>
+      <li><a href="about.html">ABOUT</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+      <li><a href="register.html">LOGIN</a></li>
+    </ul>
+  </div>
+  
         <div class="content">
             <h1>Welcome To OASIS Online Portal</h1>
             <h2>Comprehensive, Compassionate Care — All Under One Roof.</h2>
@@ -42,7 +48,7 @@
                     <button type="button"><span></span>MEET OUR EXPERTS</button>
                 </a>
             </div>
-            <button id="open-chatbot-btn">CHAT WITH US</button>
+            <button id="open-chatbot-btn"><span></span>CHAT WITH US</button>
 
             <script>
                 // Open the chatbot in a new window or page
@@ -50,5 +56,7 @@
                     window.location.href = "chatbot.html";  // This will redirect to the chatbot page
                 });
             </script>  
+            </div>
+        
 </body>
 </html>

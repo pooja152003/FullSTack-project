@@ -4,23 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/loginstyle.css" />
+
     <title>Contact Us</title>
     <style>
-        /* Reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: rgba(115, 113, 113, 0.5); /* Adjust as needed */
-            padding: 20px 30px;
-            color: white;
-            margin-top: -80px;
-          }
+         
           
           body {
             font-family: Arial;
@@ -32,7 +20,7 @@
             background-color: #f4f4f4; /* Fallback color */
             position: relative;
             padding: 80px 0 0; /* Space for header */
-        }
+        } 
         
         body::before {
             content: '';
@@ -53,6 +41,7 @@
           }
         .navbar ul li a:hover {
             text-decoration: underline;
+            color:#02617b;
         }
 
   
@@ -62,19 +51,21 @@
             justify-content: center;
             align-items: center;
             width: 100%;
-            height: 100%;
+            height: 600px;
+            position:relative;
+            margin-bottom:100px;
         }
         
         /* Contact box styling */
         .contact-box {
             background: rgba(116, 115, 115, 0.8); /* White background with some opacity */
-            padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             width: 500px; /* Fixed width for the form container */
             box-sizing: border-box;
             margin-top: 80px; /* Margin for spacing */
-            margin-bottom: 500px; /* Margin for spacing */
+            margin-bottom: 50px; /* Margin for spacing */
+            padding:10px;
         }
         
         .contact-box h2 {
@@ -207,12 +198,25 @@
 <body>
 
     <div class="header">
-        <span class="brand">OasIs Medicity</span>
-        <div class="nav-links">
-          <a href="index.html">HOME</a>
-          <a href="about.html">ABOUT</a>
-          <a href="contact.html">CONTACT</a>
-        </div>
+            <div class="navbar">
+              <div class="icon">
+                    <h2 class="logo">
+                      <img src="images/logo.jpg" alt="Oasis Logo">
+                        <span style="color: #034058 ">OasIs</span><br>
+                        <span style="color: teal ">Medicity</span>
+                      </h2>
+                      </div>
+                      <div class="menu" style="color:#013145">
+                        <ul>
+                            <li><a href="index.html">HOME</a></li>
+                            <li><a href="about.html">ABOUT</a></li>
+                            <li><a href="departments.html">MEDICAL SERVICES</a></li>
+                            <li><a href="doctors.html">DOCTORS </a></li>
+                        </ul>
+                    </div>
+             </div>
+             
+       
       </div>
 
       <div class="social-sidebar">

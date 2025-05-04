@@ -1,3 +1,20 @@
+@font-face {
+    font-family: 'CustomFont';
+    src: url('/images/bold.ttf') format('truetype');
+}
+
+.logo {
+    font-family: 'CustomFont', sans-serif;
+    font-size: 28px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    height: 40px;
+    margin-right: 10px;
+}
 body, html {
     margin: 0;
     padding: 0;

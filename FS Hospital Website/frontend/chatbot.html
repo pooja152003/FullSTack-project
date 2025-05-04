@@ -9,23 +9,24 @@
     <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <link rel="stylesheet" href="css/chatbot.css">
 
     <!-- Chatbot Styles -->
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
-            padding: 20px;
+            padding-top: 100px; /* Pushes content below the fixed navbar */
         }
         #chatbot-root {
-            max-width: 400px;
-            margin: auto;
-            background-color: white;
-            padding: 20px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-            display: block;
-        }
+    margin: auto;
+    margin-bottom: 50px;
+    max-width: 400px;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
         .user-message {
             text-align: right;
             background-color: #e0e0e0;
@@ -57,9 +58,66 @@
     </style>
 </head>
 <body>
-    <div id="chatbot-root"></div>  <!-- Ensure this element exists -->
-
-    <!-- Load chatbot.js at the end to ensure DOM is loaded -->
-    <script defer src="chatbot.js"></script> <!-- The defer ensures script runs after DOM is ready -->
-</body>
+    <div class="main">
+      <div class="navbar">
+        <div class="icon">
+          <h2 class="logo">
+            <img src="images/logo.jpg" alt="Oasis Logo">
+            <span style="color: #034058">OasIs</span><br>
+            <span style="color: teal">Medicity</span>
+          </h2>
+        </div>
+  
+        <div class="menu">
+          <ul>
+            <li><a href="index.html">HOME</a></li>
+            <li><a href="about.html">ABOUT</a></li>
+            <li><a href="contact.html">CONTACT</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Chatbot Container -->
+    <div class="chatbot-container">
+      <div class="chatbot-header">Oasis Medicity Chatbot</div>
+      <div class="chatbot-messages" id="chatbot-messages">
+        <!-- Messages will be inserted here -->
+      </div>
+      <div class="chatbot-input">
+        <input type="text" id="user-input" placeholder="Type your message...">
+        <button onclick="sendMessage()">Send</button>
+      </div>
+    </div>
+  
+    <!-- Script to handle basic chat functionality -->
+    <script>
+      function sendMessage() {
+        const input = document.getElementById("user-input");
+        const message = input.value.trim();
+        if (message === "") return;
+  
+        const messagesDiv = document.getElementById("chatbot-messages");
+  
+        const userMsg = document.createElement("div");
+        userMsg.className = "message user-message";
+        userMsg.textContent = message;
+        messagesDiv.appendChild(userMsg);
+  
+        input.value = "";
+  
+        // Simulate bot response
+        setTimeout(() => {
+          const botMsg = document.createElement("div");
+          botMsg.className = "message bot-message";
+          botMsg.textContent = "I'm a smart health assistant. How can I help you?";
+          messagesDiv.appendChild(botMsg);
+          messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }, 500);
+  
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+      }
+    </script>
+  </body>
+  
 </html>

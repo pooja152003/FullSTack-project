@@ -1,6 +1,24 @@
+@font-face {
+    font-family: 'CustomFont';
+    src: url('./images/bold.ttf') format('truetype');
+  }
+  
+  .logo {
+    font-family: 'CustomFont', sans-serif;
+    font-size: 28px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo img {
+    height: 40px;
+    margin-right: 10px;
+  }
+
 *{
-    margin: 0;
-    padding: 0;
+   margin: 0;
+   padding: 0;
 }
 
 .main{
@@ -14,9 +32,17 @@
 }
 
 .navbar{
-    width: 1200px;
-    height: 75px;
+    width: 1500px;
+    height: 70px;
+    padding-top: 10px;
+    
     margin: auto;
+    background-color: #dbe8f592;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
 }
 
 .icon{
@@ -25,20 +51,13 @@
     height: 70px;
 }
 
-.logo{
-    color: #f8fbf8;
-    font-size: 35px;
-    font-family: Arial;
-    padding-left: 20px;
-    float: left;
-    padding-top: 10px;
-    margin-top: 5px
-}
+
 
 .menu{
-    width: 400px;
-    float: left;
-    height: 70px;
+    width: 990px;
+    float: right;
+    height: 100px;
+    
 }
 
 ul{
@@ -50,14 +69,14 @@ ul{
 
 ul li{
     list-style: none;
-    margin-left: 62px;
+    margin-left: 120px;
     margin-top: 27px;
     font-size: 14px;
 }
 
 ul li a{
     text-decoration: none;
-    color: #4e758d;
+    color: #021f3b;
     font-family: Arial;
     font-weight: bold;
     transition: 0.4s ease-in-out;
@@ -69,8 +88,8 @@ ul li a:hover{
 
 .search{
     width: 330px;
-    float: left;
-    margin-left: 270px;
+    float: right;
+    margin-right: 70px;
 }
 
 .srch{
@@ -117,7 +136,7 @@ ul li a:hover{
 .content {
     width: 1200px;
     height: auto;
-    margin: auto;
+    margin: 90px;
     color: #052457;
     position: relative;
     margin-right: -60px;  /* Move content to the right by 40px */
@@ -129,11 +148,12 @@ ul li a:hover{
 
 
 .content .par{
-    padding-left: 20px;
+    padding-left: 15px;
     padding-bottom: 25px;
     font-family: Arial;
     letter-spacing: 1.2px;
     line-height: 30px;
+    font-size: 20px;
 }
 
 .content h1{
@@ -183,9 +203,11 @@ ul li a:hover{
     position: absolute;
     top: 10px;
     border-radius: 10px;
-    left:600px;
+    left:800px;
     padding: 25px;
-    box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.3);}
+    box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.3);
+
+}
 
 .form h2{
     width: 220px;

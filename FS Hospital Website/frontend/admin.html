@@ -4,8 +4,26 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="css/about.css">
   <style>
-    * {
+    /* @font-face {
+  font-family: 'CustomFont';
+  src: url('./images/bold.ttf') format('truetype');
+}
+
+.logo {
+  font-family: 'CustomFont', sans-serif;
+  font-size: 28px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  height: 40px;
+  margin-right: 10px;
+} */
+* {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
@@ -99,10 +117,29 @@
   </style>
 </head>
 <body>
+  <div class="banner">
+    <div class="navbar">
+      <div class="icon">
+            <h2 class="logo">
+              <img src="images/logo.jpg" alt="Oasis Logo">
+                <span style="color: #034058 ">OasIs</span><br>
+                <span style="color: teal ">Medicity</span>
+      </h2>
+         
+      </div>
+      <h2 style="text-align: center;color: #034058;">ADMIN PANEL</h2>
+      <div class="menu-btn" id="menu-btn">
+        <i class="ri-menu-line"></i>
+      </div>
+      <ul id="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="#" onclick="logout()">Logout</a></li>
+      </ul>
+    </div>
   <div class="overlay"></div>
   <div class="container">
+    
     <div class="sidebar">
-      <h2>Admin Panel</h2>
       <ul class="menu">
         <li onclick="showContent('dashboard')">Dashboard</li>
         <li onclick="showContent('manageUsers')">Manage Users</li>
@@ -211,15 +248,9 @@
       </table>
     </div>
 </div>
-<!-- LOGOUT -->
-<div id="logout" class="content-section" style="display: none;">
-    <h2>Logout</h2>
-  </div>
-    </div>
-    </div>
+
 
   
-
   <script>
    function showLogout() {
     // Show the logout section
