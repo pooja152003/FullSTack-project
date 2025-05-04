@@ -41,7 +41,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(0, 0, 0, 0.5); /* Dark overlay with 50% opacity */
+            background: rgba(63, 62, 62, 0.7); /* Dark overlay with 50% opacity */
             z-index: -1; /* Ensures it stays behind the content */
         }
         
@@ -55,39 +55,7 @@
             text-decoration: underline;
         }
 
-        /* Sidebar */
-        .sidebar {
-            width: 50px;
-            position: fixed;
-            top: 80px;
-            left: 0;
-            background-color: #f4f4f4;
-            padding: 20px;
-            box-shadow: 2px 0px 5px rgba(154, 15, 15, 0.1);
-        }
-
-        .sidebar h3 {
-            font-size: 1.5em;
-            margin-bottom: 20px;
-        }
-
-        .sidebar ul {
-            list-style-type: none;
-        }
-
-        .sidebar ul li {
-            margin-bottom: 10px;
-        }
-
-        .sidebar ul li a {
-            display: block;
-            text-align: center;
-        }
-
-        .sidebar ul li a img {
-            width: 30px;
-            height: 30px;
-        }
+  
 
         .container {
             display: flex;
@@ -167,7 +135,7 @@
 
         /* Footer */
         footer {
-            background-color: #333;
+            background: rgba(63, 62, 62, 0.7);
             color: white;
             text-align: center;
             padding: 15px;
@@ -175,6 +143,7 @@
             width: 100%;
             bottom: 0 ;
         }
+        
         .nav-links a {
             margin-left: 20px; /* Spacing between links */
             text-decoration: none;
@@ -184,7 +153,53 @@
           .contact-box label {
             color: #013145;
         }
+        .social-sidebar {
+            position: fixed;
+            top: 50%;
+            right: 0;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 1000;
+        }
         
+        .social-sidebar a {
+            display: flex;
+            align-items:baseline;
+            justify-content: flex-start;
+            background-color: rgba(246, 242, 242, 0.8);
+            padding: 20px;
+            border-radius: 50px 5px 5px 50px;
+            text-decoration:double;
+            transition: all 0.8s ease;
+            transform: translateX(70%);
+            width: 200px;
+            height: 70px;
+            overflow: hidden;
+        }
+        
+        .social-sidebar a:hover {
+            transform: translateX(20%);
+            background-color: white
+        }
+        
+        .social-sidebar img {
+            width: 30px;
+            height: 30px;
+            margin-right: 20px;
+        }
+        
+        .social-sidebar span {
+            white-space: normal;     /* Allow wrapping */
+            word-wrap: break-word;   /* Break long words if needed */
+            font-weight: bold;
+            font-style: italic;
+            color: #034058;
+            font-size: 12px;
+            max-width: 80px;         /* Set a width to force wrapping */
+            display: inline-block;
+        }
         
     </style>
 </head>
@@ -200,15 +215,36 @@
         </div>
       </div>
 
-    <!-- Sidebar -->
-    <div class="sidebar">
-        <h3>Follow Us</h3>
-        <ul>
-            <li><a href="https://www.instagram.com" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram"></a></li>
-            <li><a href="https://wa.me/1234567890" target="_blank"><img src="<img width="48" height="48" src="https://img.icons8.com/color/48/whatsapp--v1.png" alt="WhatsApp"></a></li>
-            <li><a href="mailto:info@hospital.com" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6c/Email_icon.png" alt="Email"></a></li>
-        </ul>
-    </div>
+      <div class="social-sidebar">
+        <a href="tel:+911234567890">
+            <img src="https://img.icons8.com/external-prettycons-solid-prettycons/60/external-telephone-communications-prettycons-solid-prettycons.png" alt="Phone">
+            <span>Call Us Now</span>
+          </a>
+          
+        <a href="https://instagram.com" target="_blank">
+          <img src="https://img.icons8.com/fluency/48/instagram-new.png" alt="Instagram">
+          <span>Contact us via Instagram</span>
+        </a>
+        <a href="https://wa.me/your-number" target="_blank">
+          <img src="https://img.icons8.com/color/48/whatsapp--v1.png" alt="WhatsApp">
+          <span>Contact us via WhatsApp</span>
+        </a>
+        <a href="mailto:brightpwin2127@gmail.com">
+          <img src="https://img.icons8.com/color/50/gmail-new.png" alt="Email">
+          <span> Contact us via Email</span>
+        </a>
+        <a href="https://www.facebook.com" target="_blank">
+          <img src="https://img.icons8.com/color/48/facebook.png" alt="Facebook">
+          <span>Contact us via Facebook</span>
+          </a>
+        <a href="https://twitter.com" target="_blank">
+            <img src="https://img.icons8.com/ios-filled/50/twitterx--v1.png" alt="Twitter">
+            <span>Contact us via Twitter</span>
+        </a>
+          
+        
+      </div>
+      
 
     <!-- Main Container -->
     <div class="container">
@@ -232,7 +268,7 @@
             <textarea id="remarks" name="remarks" rows="4" required></textarea>
 
             <label for="rating">Rating:</label>
-            <select id="rating" name="rating">
+            <select id="rating" name="rating" required>
                 <option value="1">1 - Poor</option>
                 <option value="2">2 - Fair</option>
                 <option value="3">3 - Good</option>
@@ -279,6 +315,7 @@
               window.location.href = "index.html"; // Replace with your homepage
             }, 2000); // wait 2 seconds before redirect
           }
+
     </script>
 </body>
 
