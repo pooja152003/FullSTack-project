@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Dashboard</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background: url('images/indeximg.jpg') no-repeat center center fixed;
+      background-size: cover;
+      font-family: Arial, sans-serif;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+    .container {
+      display: flex;
+      min-height: 100vh;
+    }
+    .sidebar {
+      width: 220px;
+      background: #2c3e50;
+      color: white;
+      padding-top: 40px;
+      display: flex;
+      flex-direction: column;
+    }
+    .sidebar h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .menu {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+    .menu li {
+      padding: 15px 20px;
+      cursor: pointer;
+    }
+    .menu li:hover {
+      background: #34495e;
+    }
+    .menu .logout {
+      margin-top: auto;
+    }
+
+    .main-content {
+      flex: 1;
+      padding: 20px;
+      color: white;
+    }
+
+    .content-section {
+      display: none;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: -1;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 300px;
+      margin-left: 100px;
+    }
+
+    table th, table td {
+      padding: 10px;
+      text-align: left;
+      border: 1px solid #ddd;
+    }
+
+    table th {
+      background-color: #2c3e50;
+      color: white;
+    }
+    .main-content {
+        display: flex;
+        justify-content: center;  /* Centers horizontally */
+        align-items: center;      /* Centers vertically */
+        height: 80vh;            /* Ensures it's full height of the screen */
+        width: 20%;    
+                  /* Full width */
+    }
+    
+  </style>
+</head>
+<body>
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="sidebar">
+      <h2>Admin Panel</h2>
+      <ul class="menu">
+        <li onclick="showContent('dashboard')">Dashboard</li>
+        <li onclick="showContent('manageUsers')">Manage Users</li>
+        <li onclick="showContent('addStaff')">Add new Staffs</li>
+        <li onclick="showContent('doctorSchedule')">Today's Doctors Schedule</li>
+        <li onclick="showContent('operationChart')">Upcoming Operation Chart</li>
+        <li onclick="showContent('otSchedule')">OT Schedule</li>
+        <li onclick="showContent('staffOnDuty')">Staff on Duty</li>
+        <li onclick="showContent('staffOnLeave')">Staff on Leave</li>
+        <li onclick="showContent('leaveRequests')">Staff Leave Requests</li>
+        <li onclick="showContent('reports')">Reports</li>
+        <li class="logout" onclick="showContent('logout')">Logout</li>
+      </ul>
+    </div>
+    <div class="main-content">
+    <!-- DASHBOARD -->
+    <div id="dashboard" class="content-section" style="display: none;">
+      <h2>Dashboard</h2>
+      <table>
+        <tr><th>Metric</th><th>Count</th></tr>
+        <tr><td>Total Staff</td><td>150</td></tr>
+        <tr><td>Patients Today</td><td>45</td></tr>
+        <tr><td>Operations Scheduled</td><td>6</td></tr>
+      </table>
+    </div>
+
+    <!-- MANAGE USERS -->
+    <div id="manageUsers" class="content-section" style="display: none;">
+      <h2>Manage Users</h2>
+      <table>
+        <tr><th>User ID</th><th>Name</th><th>Role</th><th>Status</th></tr>
+        <tr><td>001</td><td>John Doe</td><td>Admin</td><td>Active</td></tr>
+        <tr><td>002</td><td>Jane Smith</td><td>Doctor</td><td>Inactive</td></tr>
+      </table>
+    </div>
+
+    <!-- ADD NEW STAFF -->
+    <div id="addStaff" class="content-section" style="display: none;">
+      <h2>Add New Staffs</h2>
+      <table>
+        <tr><th>Name</th><th>Department</th><th>Role</th><th>Date Joined</th></tr>
+        <tr><td>Dr. Asha</td><td>Cardiology</td><td>Doctor</td><td>2024-02-01</td></tr>
+      </table>
+    </div>
+
+    <!-- TODAY'S DOCTOR SCHEDULE -->
+    <div id="doctorSchedule" class="content-section" style="display: none;">
+      <h2>Today's Doctors Schedule</h2>
+      <table>
+        <tr><th>Doctor</th><th>Department</th><th>Time</th></tr>
+        <tr><td>Dr. Rao</td><td>General</td><td>10:00 AM - 1:00 PM</td></tr>
+      </table>
+    </div>
+
+    <!-- UPCOMING OPERATION CHART -->
+    <div id="operationChart" class="content-section" style="display: none;">
+      <h2>Upcoming Operation Chart</h2>
+      <table>
+        <tr><th>Patient</th><th>Procedure</th><th>Doctor</th><th>Date</th></tr>
+        <tr><td>Ram</td><td>Appendectomy</td><td>Dr. Khan</td><td>2025-05-10</td></tr>
+      </table>
+    </div>
+
+    <!-- OT SCHEDULE -->
+    <div id="otSchedule" class="content-section" style="display: none;">
+      <h2>OT Schedule</h2>
+      <table>
+        <tr><th>OT Room</th><th>Time</th><th>Procedure</th></tr>
+        <tr><td>OT1</td><td>9:00 AM</td><td>Heart Bypass</td></tr>
+      </table>
+    </div>
+
+    <!-- STAFF ON DUTY -->
+    <div id="staffOnDuty" class="content-section" style="display: none;">
+      <h2>Staff on Duty</h2>
+      <table>
+        <tr><th>Name</th><th>Department</th><th>Shift</th></tr>
+        <tr><td>Sita</td><td>Emergency</td><td>Night</td></tr>
+      </table>
+    </div>
+
+    <!-- STAFF ON LEAVE -->
+    <div id="staffOnLeave" class="content-section" style="display: none;">
+      <h2>Staff on Leave</h2>
+      <table>
+        <tr><th>Name</th><th>Department</th><th>Leave Dates</th></tr>
+        <tr><td>Ravi</td><td>Radiology</td><td>2025-05-02 to 2025-05-05</td></tr>
+      </table>
+    </div>
+
+    <!-- STAFF LEAVE REQUESTS -->
+    <div id="leaveRequests" class="content-section" style="display: none;">
+      <h2>Staff Leave Requests</h2>
+      <table>
+        <tr><th>Name</th><th>Reason</th><th>Status</th></tr>
+        <tr><td>Anjali</td><td>Personal</td><td>Pending</td></tr>
+      </table>
+    </div>
+
+    <!-- REPORTS -->
+    <div id="reports" class="content-section" style="display: none;">
+      <h2>Reports</h2>
+      <table>
+        <tr><th>Report Name</th><th>Date</th><th>Status</th></tr>
+        <tr><td>Monthly Staff Attendance</td><td>2025-05-01</td><td>Generated</td></tr>
+      </table>
+    </div>
+</div>
+<!-- LOGOUT -->
+<div id="logout" class="content-section" style="display: none;">
+    <h2>Logout</h2>
+  </div>
+    </div>
+    </div>
+
+  
+
+  <script>
+   function showLogout() {
+    // Show the logout section
+    document.getElementById('logout').style.display = 'block';
+    
+    // Redirect after 3 seconds
+    setTimeout(function() {
+        try {
+            // Redirect to home page
+            window.location.href = 'index.html';  // Or '/' depending on your setup
+        } catch (error) {
+            console.error('Error during redirect:', error);
+        }
+    }, 20000); // 3 seconds delay
+}
+
+// Call the function when logging out
+showLogout();
+
+// Function to show content
+function showContent(sectionId) {
+  // Hide all content sections
+  const sections = document.querySelectorAll('.content-section');
+  sections.forEach(sec => sec.style.display = 'none');
+
+  // Show the selected section
+  const activeSection = document.getElementById(sectionId);
+  if (activeSection) {
+    activeSection.style.display = 'block';
+
+    // Update page title
+    const heading = activeSection.querySelector('h2');
+    if (heading) {
+      document.getElementById('pageTitle').innerText = heading.innerText;
+    }
+  }
+}
+
+  </script>
+</body>
+</html>

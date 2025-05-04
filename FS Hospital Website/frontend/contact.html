@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <style>
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(115, 113, 113, 0.5); /* Adjust as needed */
+            padding: 20px 30px;
+            color: white;
+            margin-top: -80px;
+          }
+          
+          body {
+            font-family: Arial;
+            margin: 0;
+            padding: 0;
+            background: url('images/indeximg.jpg') no-repeat center center fixed;
+            background-size: cover;
+            overflow: hidden;
+            background-color: #f4f4f4; /* Fallback color */
+            position: relative;
+            padding: 80px 0 0; /* Space for header */
+        }
+        
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(63, 62, 62, 0.7); /* Dark overlay with 50% opacity */
+            z-index: -1; /* Ensures it stays behind the content */
+        }
+        
+        .brand {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 24px;
+            font-weight: bold;
+            color: white;
+          }
+        .navbar ul li a:hover {
+            text-decoration: underline;
+        }
+
+  
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+        }
+        
+        /* Contact box styling */
+        .contact-box {
+            background: rgba(116, 115, 115, 0.8); /* White background with some opacity */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 500px; /* Fixed width for the form container */
+            box-sizing: border-box;
+            margin-top: 80px; /* Margin for spacing */
+            margin-bottom: 500px; /* Margin for spacing */
+        }
+        
+        .contact-box h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        /* Form styling */
+        .contact-box form {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .contact-box label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        .contact-box input,
+        .contact-box textarea {
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #de3c3c;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        .contact-box select {
+            padding: 12px 15px; /* Increase padding for better spacing */
+            margin-bottom: 15px;
+            border: 1px solid #d95555;
+            border-radius: 5px;
+            font-size: 15px; /* Increase font size for better readability */
+            background-color: #fff; /* White background for the dropdown */
+            cursor: pointer;
+            width: 100%; /* Make the dropdown span the full width of the container */
+            box-sizing: border-box; /* Ensure the padding is included in the width */
+        }
+
+        .contact-box textarea {
+            resize: vertical;
+        }
+        
+        .contact-box button {
+            background-color: #034058; /* Green background */
+            color: white;
+            padding: 12px;
+            border: none;
+            margin-top: 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        
+        .contact-box button:hover {
+            background-color: #02617b;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(63, 62, 62, 0.7);
+            color: white;
+            text-align: center;
+            padding: 15px;
+            position: fixed;
+            width: 100%;
+            bottom: 0 ;
+        }
+        
+        .nav-links a {
+            margin-left: 20px; /* Spacing between links */
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+          }
+          .contact-box label {
+            color: #013145;
+        }
+        .social-sidebar {
+            position: fixed;
+            top: 50%;
+            right: 0;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 1000;
+        }
+        
+        .social-sidebar a {
+            display: flex;
+            align-items:baseline;
+            justify-content: flex-start;
+            background-color: rgba(246, 242, 242, 0.8);
+            padding: 20px;
+            border-radius: 50px 5px 5px 50px;
+            text-decoration:double;
+            transition: all 0.8s ease;
+            transform: translateX(70%);
+            width: 200px;
+            height: 70px;
+            overflow: hidden;
+        }
+        
+        .social-sidebar a:hover {
+            transform: translateX(20%);
+            background-color: white
+        }
+        
+        .social-sidebar img {
+            width: 30px;
+            height: 30px;
+            margin-right: 20px;
+        }
+        
+        .social-sidebar span {
+            white-space: normal;     /* Allow wrapping */
+            word-wrap: break-word;   /* Break long words if needed */
+            font-weight: bold;
+            font-style: italic;
+            color: #034058;
+            font-size: 12px;
+            max-width: 80px;         /* Set a width to force wrapping */
+            display: inline-block;
+        }
+        
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <span class="brand">OasIs Medicity</span>
+        <div class="nav-links">
+          <a href="index.html">HOME</a>
+          <a href="about.html">ABOUT</a>
+          <a href="contact.html">CONTACT</a>
+        </div>
+      </div>
+
+      <div class="social-sidebar">
+        <a href="tel:+911234567890">
+            <img src="https://img.icons8.com/external-prettycons-solid-prettycons/60/external-telephone-communications-prettycons-solid-prettycons.png" alt="Phone">
+            <span>Call Us Now</span>
+          </a>
+          
+        <a href="https://instagram.com" target="_blank">
+          <img src="https://img.icons8.com/fluency/48/instagram-new.png" alt="Instagram">
+          <span>Contact us via Instagram</span>
+        </a>
+        <a href="https://wa.me/your-number" target="_blank">
+          <img src="https://img.icons8.com/color/48/whatsapp--v1.png" alt="WhatsApp">
+          <span>Contact us via WhatsApp</span>
+        </a>
+        <a href="mailto:brightpwin2127@gmail.com">
+          <img src="https://img.icons8.com/color/50/gmail-new.png" alt="Email">
+          <span> Contact us via Email</span>
+        </a>
+        <a href="https://www.facebook.com" target="_blank">
+          <img src="https://img.icons8.com/color/48/facebook.png" alt="Facebook">
+          <span>Contact us via Facebook</span>
+          </a>
+        <a href="https://twitter.com" target="_blank">
+            <img src="https://img.icons8.com/ios-filled/50/twitterx--v1.png" alt="Twitter">
+            <span>Contact us via Twitter</span>
+        </a>
+          
+        
+      </div>
+      
+
+    <!-- Main Container -->
+    <div class="container">
+        <div class="contact-box">
+            <h1 style="color: rgb(242, 230, 230); font-size: 30px; font-weight: 700; text-align: center; text-shadow: 2px 2px 4px rgba(132, 3, 3, 0.6); margin-bottom: 50px;">RATE US</h1>
+            <form action="#" method="post">
+                <div style="text-align: center;margin-top: -70px;">
+                    <img 
+                      src="https://img.icons8.com/external-flaticons-flat-flat-icons/64/external-five-stars-customer-feedback-flaticons-flat-flat-icons.png" 
+                      alt="Five Star Icon"
+                      style="width:100px; height: 100px;">
+                  </div>
+                  
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" placeholder="Enter your name" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+            <label for="remarks">Remarks:</label>
+            <textarea id="remarks" name="remarks" rows="4" required></textarea>
+
+            <label for="rating">Rating:</label>
+            <select id="rating" name="rating" required>
+                <option value="1">1 - Poor</option>
+                <option value="2">2 - Fair</option>
+                <option value="3">3 - Good</option>
+                <option value="4">4 - Very Good</option>
+                <option value="5">5 - Excellent</option>
+            </select>
+
+            <div id="popup" style="
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;">
+            
+            <div style="
+              background: white;
+              padding: 20px 40px;
+              border-radius: 12px;
+              text-align: center;
+              font-size: 18px;
+              color: black;
+              box-shadow: 0 0 15px rgba(0,0,0,0.3);">
+              ✅ Thank you! Your feedback has been submitted.
+            </div>
+          </div>
+          
+            <button type="button" onclick="submitAndRedirect()">Submit</button>
+        </form>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Hospital Website | All Rights Reserved</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        function submitAndRedirect() {
+            document.getElementById("popup").style.display = "flex";
+            setTimeout(() => {
+              window.location.href = "index.html"; // Replace with your homepage
+            }, 2000); // wait 2 seconds before redirect
+          }
+
+    </script>
+</body>
+
+</html>
