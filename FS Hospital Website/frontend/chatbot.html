@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot - Oasis Medicity</title>
+    
+    <!-- Load React & Babel -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <!-- Chatbot Styles -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        #chatbot-root {
+            max-width: 400px;
+            margin: auto;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            display: block;
+        }
+        .user-message {
+            text-align: right;
+            background-color: #e0e0e0;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+        }
+        .bot-message {
+            text-align: left;
+            background-color: #f0f0f0;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+        }
+        .chatbot-container input {
+            width: calc(100% - 80px);
+            padding: 10px;
+            margin-right: 10px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+        }
+        .chatbot-container button {
+            padding: 10px 20px;
+            border-radius: 10px;
+            border: none;
+            background-color: #007BFF;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <div id="chatbot-root"></div>  <!-- Ensure this element exists -->
+
+    <!-- Load chatbot.js at the end to ensure DOM is loaded -->
+    <script defer src="chatbot.js"></script> <!-- The defer ensures script runs after DOM is ready -->
+</body>
+</html>

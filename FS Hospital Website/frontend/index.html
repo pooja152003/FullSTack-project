@@ -1,34 +1,54 @@
-<html>
-    <head>
-        <title>My First Website</title>
-        <link rel="stylesheet" href="css/indexstyles.css">
-    </head>
-    <body>
-        <div class="banner" >
-            <div class="navbar">
-              <div class="icon">
-                <h2 class="logo">Oasis<br>Medicity</h2>
-              </div>                
-                <ul>
-                  <li><a href="contact.html">CONTACT</a></li>
-                  <li><a href="about.html">ABOUT</a></li>
-                    <li><a href="faq.html">FAQ</a></li>
-                    <li><a href="register.html">JOIN US</a></li>
-                </ul>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Oasis Medicity - Home</title>
+    <link rel="stylesheet" href="css/indexstyles.css">
+    
+    <!-- Load React & Babel -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
 
-            </div>
-            <div class="content">
-                <h1>Welcome To OASIS online Portal</h1>
-                <h2>Comprehensive, Compassionate Care — All Under One Roof.</h2>
-                <p>A state-of-the-art multispeciality hospital committed to delivering advanced medical care with empathy and excellence.
-                     <BR>Whether it’s a routine check-up or specialized treatment, we’re here to guide you every step of the way.</p>
-                <div>
-                  <a href="appointments.html">
-                    <button type="button"><span></span>BOOK APPOINTMENTS</button></a>
-                    <a href="doctors.html">
-                    <button type="button"><span></span>MEET OUR EXPERTS</button></a>
-                </div>    
-            </div>
+    <!-- Load chatbot.js -->
+    <script defer src="chatbot.js"></script>
+    
+
+</head>
+
+<body>
+    <div class="banner">
+        <div class="navbar">
+            <div class="icon">
+                <h2 class="logo">Oasis<br>Medicity</h2>
+            </div>                
+            <ul>
+                <li><a href="contact.html">CONTACT</a></li>
+                <li><a href="about.html">ABOUT</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="register.html">LOGIN</a></li>
+            </ul>
         </div>
-    </body>
+
+        <div class="content">
+            <h1>Welcome To OASIS Online Portal</h1>
+            <h2>Comprehensive, Compassionate Care — All Under One Roof.</h2>
+            <p>A state-of-the-art multispeciality hospital committed to delivering advanced medical care with empathy and excellence.
+               <br>Whether it’s a routine check-up or specialized treatment, we’re here to guide you every step of the way.</p>
+
+            <div>
+                <a href="appointments.html">
+                    <button type="button"><span></span>BOOK APPOINTMENTS</button>
+                </a>
+                <a href="doctors.html">
+                    <button type="button"><span></span>MEET OUR EXPERTS</button>
+                </a>
+            </div>
+            <button id="open-chatbot-btn">CHAT WITH US</button>
+
+            <script>
+                // Open the chatbot in a new window or page
+                document.getElementById("open-chatbot-btn").addEventListener("click", function() {
+                    window.location.href = "chatbot.html";  // This will redirect to the chatbot page
+                });
+            </script>  
+</body>
 </html>
