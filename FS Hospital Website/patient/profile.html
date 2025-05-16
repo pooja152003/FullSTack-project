@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Patient Profile</title>
+  <link rel="stylesheet" href="css/profile.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="profile-container">
+    <h1>Patient Profile</h1>
+
+    <div class="profile-card">
+      <img src="images/default-avatar.png" alt="Patient Avatar" class="avatar" />
+
+      <div class="profile-info">
+        <h2>John Doe</h2>
+        <p><strong>Patient ID:</strong> P123456</p>
+        <p><strong>Email:</strong> john.doe@example.com</p>
+        <p><strong>Phone:</strong> +91 9876543210</p>
+        <p><strong>Address:</strong> 123 Main Street, Kochi, Kerala</p>
+        <p><strong>Blood Group:</strong> B+</p>
+        <p><strong>Date of Birth:</strong> 10 March 1985</p>
+        <p><strong>Gender:</strong> Male</p>
+      </div>
+    </div>
+
+    <div class="update-section">
+      <h3>Update Contact Details</h3>
+      <form action="#" method="post">
+        <label for="phone">Phone Number</label>
+        <input type="text" id="phone" name="phone" placeholder="+91 9876543210" />
+
+        <label for="address">Address</label>
+        <input type="text" id="address" name="address" placeholder="Your current address" />
+
+        <label for="password">New Password</label>
+        <input type="password" id="password" name="password" placeholder="Enter new password" />
+
+        <button type="submit">Update Profile</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

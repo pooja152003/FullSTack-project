@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Notifications</title>
+  <link rel="stylesheet" href="css/notification.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="notification-container">
+        <h1>Notifications</h1>
+        <button id="markReadBtn">Mark all as read</button>
+      
+        <ul class="notification-list">
+          <li class="notification unread">
+            <p><strong>New Report:</strong> Your X-Ray Chest report is now available.</p>
+            <span class="date">07 May 2025</span>
+          </li>
+          <li class="notification unread">
+            <p><strong>Appointment Reminder:</strong> Appointment with Dr. Rahul Menon tomorrow at 2:00 PM.</p>
+            <span class="date">06 May 2025</span>
+          </li>
+          <li class="notification">
+            <p><strong>Payment Received:</strong> ECG bill processed.</p>
+            <span class="date">01 May 2025</span>
+          </li>
+        </ul>
+      </div>
+      <script>
+        const markReadBtn = document.getElementById("markReadBtn");
+        const unreadNotifications = document.querySelectorAll(".notification.unread");
+      
+        markReadBtn.addEventListener("click", () => {
+          unreadNotifications.forEach(notification => {
+            notification.classList.remove("unread");
+          });
+        });
+      </script>
+            
+</body>
+</html>
