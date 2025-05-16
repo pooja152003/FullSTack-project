@@ -3,165 +3,91 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <link rel="stylesheet" href="css/faq.css">
-  <title>Test Departments</title>
+  <title>Our Medical Departments</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:700,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/dept.css">
   <style>
-    body {
-      height: 10vh;
-      font-family: Arial;
-      margin: 0;
-      padding: 0;
-      background: url('images/indeximg.jpg') no-repeat center center fixed;
-      background-size: cover;
-      overflow : relative;
-    }
-  
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background-color: #d1e7f2;
-      padding: 20px 30px;
-    }
-  
-    .nav-links a {
-      margin-left: 20px; /* Spacing between links */
-      text-decoration: none;
-      color: #051366;
-      font-weight: bold;
-    }
-    .overlay {
-      background-color: rgba(10, 10, 10, 0.5); /* Slight white overlay */
-      min-height: 100vh;
-      padding: 30px;
-    }
-
-    .container {
-      max-width: 1000px;
-      margin: auto;
-      text-align: center;
-      margin-bottom: -10px;
-    }
-
+    /* Minimal grid for demonstration */
     .departments-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-      margin-top: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px;
+      justify-content: center;
+      padding: 60px 20px 20px 20px;
+      min-height: 100vh;
+      background: #f2f4f8;
     }
-    .department-card {
-      background: rgba(226, 229, 232, 0.8);
-      padding: 30px;
-      border-radius: 10px;
-      box-shadow: 0 4px 6px rgba(59, 8, 8, 0.1);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      cursor: pointer;
-    }
-    
-    .department-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 12px 20px rgba(0, 0, 0, 0.2);
-    }
-    
-    .department-icon {
-      width: 60px;
-      height: 60px;
-    }
-
-    .department-title {
-      font-size: 20px;
-      margin: 10px 0;
-      color: #0077b6;
-    }
-
-    .department-description {
-      color: #555;
-    }
-    #checkAvailability {
-      display: block;
-      width: 100%;
-      padding: 10px;
-      margin-top: 20px;
-      background-color: #034058;
-      color: white;
-      font-size: 16px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      text-align: center;
-      text-decoration: none; /* Remove underline from link */
-    }
-    
-    #checkAvailability:hover {
-      background-color: #02617b; /* Change color on hover */
-    }
-    .brand {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      font-size: 24px;
-      font-weight: bold;
-      color: white;
-    }
-    
-    
-    
   </style>
 </head>
 <body>
-
-    <div class="header">
-          <div class="icon">
-                <h2 class="logo">
-                  <img src="images/logo.jpg" alt="Oasis Logo">
-                    <span style="color: #034058 ">OasIs</span><br>
-                    <span style="color: teal ">Medicity</span>
-          </h2>
-             
-          </div>
-      <div class="nav-links">
-        <a href="index.html">HOME</a>
-        <a href="about.html">ABOUT</a>
-        <a href="contact.html">CONTACT</a>
-      </div>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">
+      <img src="images/logo.jpg" alt="Oasis Logo">
+      <span>OasIs</span>
+      <span>Medicity</span>
     </div>
-
-  <div class="overlay">
-    <div class="container">
-      <h1 style="color: white; font-size: 40px; font-weight: 700; text-align: center; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6); margin-bottom: 50px;">OUR MEDICAL DEPARTMENTS</h1>
-      <div class="departments-grid" id="departmentsGrid"></div>
-      <a href="doctors.html" id="checkAvailability">View Our Experts</a>
-
+    <button class="hamburger" aria-label="Open Menu" onclick="toggleMenu()">&#9776;</button>
+    <div class="nav-links">
+      <a href="index.html">HOME</a>
+      <a href="about.html">ABOUT</a>
+      <a href="contact.html">CONTACT</a>
     </div>
-  </div>
+  </nav>
+
+  <!-- Departments Grid -->
   <div class="departments-grid" id="departmentsGrid"></div>
 
-  
   <script>
-    const departments = [
-      { name: "Cardiology", description: "Heart and cardiovascular system.", icon: "https://img.icons8.com/color/96/heart-with-pulse.png" },
-      { name: "Neurology", description: "Brain and nervous system.", icon: "https://img.icons8.com/color/96/brain.png" },
-      { name: "Orthopedics", description: "Bones and muscles.", icon: ["https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/external-orthopedic-medical-and-healthcare-flaticons-lineal-color-flat-icons.png"] },
-      { name: "Gynecology", description: "Women's reproductive health.",icon: ["https://img.icons8.com/color/48/periods.png"] },
-      { name: "Ophthalmology", description: "Eye and vision care.", icon: ["//img.icons8.com/dusk/64/ophthalmology.png"] },
-      { name: "Pediatrics", description: "Child healthcare.", icon: "https://img.icons8.com/color/96/baby.png" },
-      { name: "ENT", description: "Ear, nose, and throat.", icon: ["https://img.icons8.com/pulsar-color/48/ear-ache.png"] },
-      { name: "Pulmonology", description: "Lungs and respiratory system.", icon: "https://img.icons8.com/color/96/lungs.png" },
-      { name: "Gastroenterology", description: "Digestive system.", icon: "https://img.icons8.com/color/96/stomach.png" },
-      { name: "Psychiatry", description: "Mental health.", icon: "https://img.icons8.com/color/96/mental-health.png" },      
-      { name: "Urology", description: "Urinary tract and male organs.", icon: "https://img.icons8.com/color/96/kidney.png" },
-      { name: "Neurology", description: "Brain and nervous system.", icon: "https://img.icons8.com/color/96/brain.png" },
-    ];
+    // Hamburger menu toggle for mobile
+    function toggleMenu() {
+      document.querySelector('.nav-links').classList.toggle('active');
+    }
 
+    // Department data with color variables for each card
+    const departments = [
+      { name: "Cardiology", description: "Heart and cardiovascular system.", icon: "https://img.icons8.com/color/96/heart-with-pulse.png", bg: "#ffd861", bgLight: "#ffeeba", shadow: "rgba(255, 215, 97, 0.48)" },
+      { name: "Neurology", description: "Brain and nervous system.", icon: "https://img.icons8.com/color/96/brain.png", bg: "#B8F9D3", bgLight: "#e2fced", shadow: "rgba(184, 249, 211, 0.48)" },
+      { name: "Orthopedics", description: "Bones and muscles.", icon: "https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/external-orthopedic-medical-and-healthcare-flaticons-lineal-color-flat-icons.png", bg: "#CEB2FC", bgLight: "#F0E7FF", shadow: "rgba(206, 178, 252, 0.48)" },
+      { name: "Gynecology", description: "Women's reproductive health.", icon: "https://img.icons8.com/color/48/periods.png", bg: "#DCE9FF", bgLight: "#f1f7ff", shadow: "rgba(220, 233, 255, 0.48)" },
+      { name: "Ophthalmology", description: "Eye and vision care.", icon: "https://img.icons8.com/dusk/64/ophthalmology.png", bg: "#ffd861", bgLight: "#ffeeba", shadow: "rgba(255, 215, 97, 0.48)" },
+      { name: "Pediatrics", description: "Child healthcare.", icon: "https://img.icons8.com/color/96/baby.png", bg: "#B8F9D3", bgLight: "#e2fced", shadow: "rgba(184, 249, 211, 0.48)" },
+      { name: "ENT", description: "Ear, nose, and throat.", icon: "https://img.icons8.com/pulsar-color/48/ear-ache.png", bg: "#CEB2FC", bgLight: "#F0E7FF", shadow: "rgba(206, 178, 252, 0.48)" },
+      { name: "Pulmonology", description: "Lungs and respiratory system.", icon: "https://img.icons8.com/color/96/lungs.png", bg: "#DCE9FF", bgLight: "#f1f7ff", shadow: "rgba(220, 233, 255, 0.48)" },
+      { name: "Gastroenterology", description: "Digestive system.", icon: "https://img.icons8.com/color/96/stomach.png", bg: "#ffd861", bgLight: "#ffeeba", shadow: "rgba(255, 215, 97, 0.48)" },
+      { name: "Psychiatry", description: "Mental health.", icon: "https://img.icons8.com/color/96/mental-health.png", bg: "#B8F9D3", bgLight: "#e2fced", shadow: "rgba(184, 249, 211, 0.48)" },
+      { name: "Urology", description: "Urinary tract and male organs.", icon: "https://img.icons8.com/color/96/kidney.png", bg: "#CEB2FC", bgLight: "#F0E7FF", shadow: "rgba(206, 178, 252, 0.48)" }
+    ];
 
     const grid = document.getElementById('departmentsGrid');
     departments.forEach(dept => {
       const card = document.createElement('div');
       card.className = 'department-card';
+      card.tabIndex = 0;
+      card.style.setProperty('--bg-color', dept.bg);
+      card.style.setProperty('--bg-color-light', dept.bgLight);
+      card.style.setProperty('--box-shadow-color', dept.shadow);
       card.innerHTML = `
-        <img src="${dept.icon}" class="department-icon">
+        <div class="icon-circle">
+          <img src="${dept.icon}" class="department-icon" alt="${dept.name} icon">
+        </div>
+        <div class="overlay"></div>
         <div class="department-title">${dept.name}</div>
         <div class="department-description">${dept.description}</div>
       `;
       grid.appendChild(card);
+    });
+
+    // Close menu when clicking outside on mobile
+    document.addEventListener('click', function(e) {
+      const nav = document.querySelector('.nav-links');
+      const ham = document.querySelector('.hamburger');
+      if (window.innerWidth <= 600 && nav.classList.contains('active')) {
+        if (!nav.contains(e.target) && !ham.contains(e.target)) {
+          nav.classList.remove('active');
+        }
+      }
     });
   </script>
 </body>

@@ -1,77 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Our Doctors</title>
-    <link rel="stylesheet" href="css/doctors.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Doctors - Oasis Medicity</title>
+  <link rel="stylesheet" href="css/doctors.css">
 </head>
 <body>
     <div class="main">
-        <div class="navbar">
-            <div class="icon">
-                <h2 class="logo">
-                  <img src="images/logo.jpg" alt="Oasis Logo">
-                    <span style="color: #034058 ">OasIs</span><br>
-                    <span style="color: teal ">Medicity</span>
-                  </h2>
-                          </div>
-
-            <div class="menu">
-                <ul>
-                    <li><a href="index.html">HOME</a></li>
-                    <li><a href="about.html">ABOUT</a></li>
-                    <li><a href="contact.html">CONTACT</a></li>
-                </ul>
-            </div>
-
-
-        </div> 
-
-        <h1 class="page-title">Meet Our Expert Doctors</h1>
-
-        <!-- Doctor Card Section -->
-        <div class="doctor-container">
-            <div class="doctor-card">
-                <img src="images/doctor1.jpg" alt="Dr. Sarah Johnson">
-                <h2>Dr. Sarah Johnson</h2>
-                <p><strong>Specialization:</strong> Cardiologist</p>
-                <p><strong>Experience:</strong> 15 years</p>
-            </div>
-
-            <div class="doctor-card">
-                <img src="images/doctor2.jpg" alt="Dr. Michael Smith">
-                <h2>Dr. Michael Smith</h2>
-                <p><strong>Specialization:</strong> Neurologist</p>
-                <p><strong>Experience:</strong> 12 years</p>
-            </div>
-
-            <div class="doctor-card">
-                <img src="images/doctor3.jpg" alt="Dr. Emily Williams">
-                <h2>Dr. Emily Williams</h2>
-                <p><strong>Specialization:</strong> Pediatrician</p>
-                <p><strong>Experience:</strong> 10 years</p>
-            </div>
-
-            <div class="doctor-card">
-                <img src="images/doctor4.jpg" alt="Dr. David Brown">
-                <h2>Dr. David Brown</h2>
-                <p><strong>Specialization:</strong> Orthopedic Surgeon</p>
-                <p><strong>Experience:</strong> 18 years</p>
-            </div>
+      <nav class="navbar">
+        <div class="logo">
+          <img src="images/logo.jpg">
+          <span>OasIs</span>
+          <span>Medicity</span>
         </div>
-        <div class="button-container">
-            <a href="appointments.html"><button class="small-btn">Book Appointment</button></a>
-        </div> 
-        <div class="button-container">
-            <a href="chatbot.html"><button class="small-btn">Chat With Us</button></a>
-        </div> 
-              
-        
+        <div class="hamburger">☰</div>
+        <ul class="nav-links">
+          <li><a href="index.html">HOME</a></li>
+          <li><a href="about.html">ABOUT</a></li>
+          <li><a href="doctors.html">DOCTORS</a></li>
+          <li><a href="contact.html">CONTACT</a></li>
+        </ul>
+      </nav>
+      <div class="doctors-section" id="doctors-section">
+        <h1>Our Expert Doctors</h1>
+        <div class="doctors-grid">
+          <div class="doctor-card">
+            <img src="images/doctor1.jpg" alt="Dr. Laura Anderson">
+            <h3>Dr. Laura Anderson</h3>
+            <p>Specialty: Cardiologist</p>
+            <p>Qualification: MD, FACC</p>
+            <p class="availability">Available: Mon, Wed, Fri</p>
+          </div>
+          <div class="doctor-card">
+            <img src="images/doctor2.jpg" alt="Dr. Michael Smith">
+            <h3>Dr. Michael Smith</h3>
+            <p>Specialty: Neurologist</p>
+            <p>Qualification: MD, PhD</p>
+            <p class="availability">Available: Tue, Thu</p>
+          </div>
+          <div class="doctor-card">
+            <img src="images/doctor3.jpg" alt="Dr. Priya Kumar">
+            <h3>Dr. Priya Kumar</h3>
+            <p>Specialty: Gynecologist</p>
+            <p>Qualification: MD, DGO</p>
+            <p class="availability">Available: Mon, Thu, Sat</p>
+          </div>
+          <div class="doctor-card">
+            <img src="images/doctor4.jpg" alt="Dr. Emily Williams">
+            <h3>Dr. Emily Williams</h3>
+            <p>Specialty: Pediatrician</p>
+            <p>Qualification: MD, FAAP</p>
+            <p class="availability">Available: Wed, Fri</p>
+          </div>
+          <div class="doctor-card">
+            <img src="images/doctor5.jpg" alt="Dr. Kevin Lee">
+            <h3>Dr. Kevin Lee</h3>
+            <p>Specialty: ENT Specialist</p>
+            <p>Qualification: MD, MS</p>
+            <p class="availability">Available: Tue, Sat</p>
+          </div>
+          <div class="doctor-card">
+            <img src="images/doctor6.jpg" alt="Dr. Robert Wilson">
+            <h3>Dr. Robert Wilson</h3>
+            <p>Specialty: General Physician</p>
+            <p>Qualification: MBBS</p>
+            <p class="availability">Available: Mon-Fri</p>
+          </div>
+        </div>
+      </div>
+      <footer>
+        <p>© 2025 Hospital Website | All Rights Reserved</p>
+      </footer>
     </div>
-
-</body>
-</html>
-
-
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.dots.min.js"></script>
+    <script>
+      // Navbar hamburger menu toggle
+      const hamburger = document.querySelector('.hamburger');
+      const navLinks = document.querySelector('.nav-links');
+  
+      hamburger.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+      });
+  
+      navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          navLinks.classList.remove('active');
+        });
+      });
+  
+      // Navbar scroll effect
+      window.addEventListener('scroll', () => {
+        const navbar = document.querySelector('.navbar');
+        if (window.scrollY > 50) {
+          navbar.classList.add('scrolled');
+        } else {
+          navbar.classList.remove('scrolled');
+        }
+      });
+  
+      // Vanta.js DOTS effect
+      VANTA.DOTS({
+        el: "#doctors-section",
+        mouseControls: true,
+        touchControls: true,
+        gyroControls: false,
+        minHeight: 200.00,
+        minWidth: 200.00,
+        scale: 1.00,
+        scaleMobile: 1.00,
+        color: 0x29be9d,
+        color2: 0xffffff,
+        backgroundColor: 0xecf1f7,
+        size: 10.00,
+        spacing: 37.00,
+        showLines: false
+      });
+    </script>
+  </body>
+  </html>
