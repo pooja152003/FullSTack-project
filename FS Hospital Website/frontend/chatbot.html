@@ -90,34 +90,49 @@
       </div>
     </div>
   
-    <!-- Script to handle basic chat functionality -->
-    <script>
-      function sendMessage() {
-        const input = document.getElementById("user-input");
-        const message = input.value.trim();
-        if (message === "") return;
-  
-        const messagesDiv = document.getElementById("chatbot-messages");
-  
-        const userMsg = document.createElement("div");
-        userMsg.className = "message user-message";
-        userMsg.textContent = message;
-        messagesDiv.appendChild(userMsg);
-  
-        input.value = "";
-  
-        // Simulate bot response
-        setTimeout(() => {
-          const botMsg = document.createElement("div");
-          botMsg.className = "message bot-message";
-          botMsg.textContent = "I'm a smart health assistant. How can I help you?";
-          messagesDiv.appendChild(botMsg);
-          messagesDiv.scrollTop = messagesDiv.scrollHeight;
-        }, 500);
-  
-        messagesDiv.scrollTop = messagesDiv.scrollHeight;
-      }
-    </script>
+// ...existing code...
+<script>
+  async function sendMessage() {
+    const input = document.getElementById("user-input");
+    const message = input.value.trim();
+    if (message === "") return;
+
+    const messagesDiv = document.getElementById("chatbot-messages");
+
+    const userMsg = document.createElement("div");
+    userMsg.className = "message user-message";
+    userMsg.textContent = message;
+    messagesDiv.appendChild(userMsg);
+
+    input.value = "";
+
+    // Send message to backend
+    try {
+      const response = await fetch('http://127.0.0.1:5000/chat', { // Update URL if needed
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ message })
+      });
+      const data = await response.json();
+
+      const botMsg = document.createElement("div");
+      botMsg.className = "message bot-message";
+      botMsg.textContent = data.reply || "Sorry, I didn't understand that.";
+      messagesDiv.appendChild(botMsg);
+      messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    } catch (error) {
+      const botMsg = document.createElement("div");
+      botMsg.className = "message bot-message";
+      botMsg.textContent = "Error connecting to chatbot server.";
+      messagesDiv.appendChild(botMsg);
+    }
+
+    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+  }
+</script>
+
   </body>
   
 </html>
