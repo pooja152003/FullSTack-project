@@ -30,7 +30,7 @@
     <!-- Main Content -->
     <main class="main-content">
       <header>
-        <h1>Welcome, Patient Name</h1>
+        <h1 id="welcomeName">Welcome, </h1>
         <p>Here's an overview of your recent activity</p>
       </header>
 
@@ -96,6 +96,24 @@
       logoutModal.style.display = 'none';
     }
   };
+  async function loadPatientName() {
+  const token = localStorage.getItem('token');
+  if (!token) return;
+  try {
+    const res = await fetch('/api/patient/me', {
+      headers: { 'Authorization': 'Bearer ' + token }
+    });
+    if (res.ok) {
+      const data = await res.json();
+      document.getElementById('welcomeName').textContent = `Welcome, ${data.name}`;
+    }
+  } catch (err) {
+    console.error('Failed to load patient name', err);
+  }
+}
+loadPatientName();
+// After successful login
+
 </script>
 
 </body>
