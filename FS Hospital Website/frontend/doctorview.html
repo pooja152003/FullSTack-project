@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Doctor Dashboard</title>
+  <link rel="stylesheet" href="css/about.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      background: url('images/indeximg.jpg') no-repeat center center fixed;
+      background-size: cover;
+      font-family: Arial, sans-serif;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+    .container {
+      display: flex;
+      min-height: 100vh;
+    }
+    .sidebar {
+      width: 220px;
+      background: #2c3e50;
+      color: white;
+      padding-top: 40px;
+      display: flex;
+      flex-direction: column;
+    }
+    .sidebar h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .menu {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+    .menu li {
+      padding: 15px 20px;
+      cursor: pointer;
+    }
+    .menu li:hover {
+      background: #34495e;
+    }
+    .menu .logout {
+      margin-top: auto;
+    }
+    .main-content {
+      flex: 1;
+      padding: 20px;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 80vh;
+      width: 20%;
+    }
+    .content-section {
+      display: none;
+    }
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: -1;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 300px;
+      margin-left: 100px;
+    }
+    table th, table td {
+      padding: 10px;
+      text-align: left;
+      border: 1px solid #ddd;
+    }
+    table th {
+      background-color: #2c3e50;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="banner">
+    <div class="navbar">
+      <div class="icon">
+        <h2 class="logo">
+          <img src="images/logo.jpg" alt="Oasis Logo">
+          <span style="color: #034058 ">OasIs</span><br>
+          <span style="color: teal ">Medicity</span>
+        </h2>
+      </div>
+      <h2 style="text-align: center;color: #034058;">DOCTOR PANEL</h2>
+      <ul id="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="#" onclick="logout()">Logout</a></li>
+      </ul>
+    </div>
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="sidebar">
+        <ul class="menu">
+          <li onclick="showContent('dashboard')">Dashboard</li>
+          <li onclick="showContent('myPatients')">My Patients</li>
+          <li onclick="showContent('appointments')">Appointments</li>
+          <li onclick="showContent('prescriptions')">Prescriptions</li>
+          <li onclick="showContent('schedule')">My Schedule</li>
+          <li onclick="showContent('reports')">Reports</li>
+          <li class="logout" onclick="logout()">Logout</li>
+        </ul>
+      </div>
+      <div class="main-content">
+        <!-- DASHBOARD -->
+        <div id="dashboard" class="content-section" style="display: block;">
+          <h2>Dashboard</h2>
+          <table>
+            <tr><th>Metric</th><th>Count</th></tr>
+            <tr><td>Today's Appointments</td><td>8</td></tr>
+            <tr><td>Patients Under Care</td><td>25</td></tr>
+            <tr><td>Pending Reports</td><td>3</td></tr>
+          </table>
+        </div>
+        <!-- MY PATIENTS -->
+        <div id="myPatients" class="content-section">
+          <h2>My Patients</h2>
+          <table>
+            <tr><th>Patient ID</th><th>Name</th><th>Condition</th><th>Status</th></tr>
+            <tr><td>P001</td><td>Rahul Kumar</td><td>Diabetes</td><td>Stable</td></tr>
+            <tr><td>P002</td><td>Meena Singh</td><td>Hypertension</td><td>Under Observation</td></tr>
+          </table>
+        </div>
+        <!-- APPOINTMENTS -->
+        <div id="appointments" class="content-section">
+          <h2>Appointments</h2>
+          <table>
+            <tr><th>Time</th><th>Patient</th><th>Reason</th></tr>
+            <tr><td>10:00 AM</td><td>Rahul Kumar</td><td>Follow-up</td></tr>
+            <tr><td>11:30 AM</td><td>Meena Singh</td><td>Consultation</td></tr>
+          </table>
+        </div>
+        <!-- PRESCRIPTIONS -->
+        <div id="prescriptions" class="content-section">
+          <h2>Prescriptions</h2>
+          <table>
+            <tr><th>Patient</th><th>Medication</th><th>Date</th></tr>
+            <tr><td>Rahul Kumar</td><td>Metformin</td><td>2025-06-09</td></tr>
+          </table>
+        </div>
+        <!-- MY SCHEDULE -->
+        <div id="schedule" class="content-section">
+          <h2>My Schedule</h2>
+          <table>
+            <tr><th>Date</th><th>Time</th><th>Activity</th></tr>
+            <tr><td>2025-06-09</td><td>10:00 AM</td><td>OPD</td></tr>
+            <tr><td>2025-06-09</td><td>2:00 PM</td><td>Surgery</td></tr>
+          </table>
+        </div>
+        <!-- REPORTS -->
+        <div id="reports" class="content-section">
+          <h2>Reports</h2>
+          <table>
+            <tr><th>Report Name</th><th>Date</th><th>Status</th></tr>
+            <tr><td>Blood Test</td><td>2025-06-08</td><td>Ready</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    function showContent(sectionId) {
+      // Hide all content sections
+      const sections = document.querySelectorAll('.content-section');
+      sections.forEach(sec => sec.style.display = 'none');
+      // Show the selected section
+      const activeSection = document.getElementById(sectionId);
+      if (activeSection) {
+        activeSection.style.display = 'block';
+      }
+    }
+    function logout() {
+      window.location.href = 'index.html';
+    }
+    // Show dashboard by default
+    showContent('dashboard');
+  </script>
+</body>
+</html>
