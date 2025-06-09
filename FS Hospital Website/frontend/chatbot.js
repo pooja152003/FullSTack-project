@@ -13,6 +13,22 @@ document.addEventListener("DOMContentLoaded", function () {
             setMessages([...messages, userMsg, botMsg]);
             setInput("");
         };
+                // Add this inside Chatbot component
+        const fileInputRef = React.useRef(null);
+
+        const handleFileUpload = async (file) => {
+            const formData = new FormData();
+            formData.append("file", file);
+
+            const res = await fetch("/upload", {
+                method: "POST",
+                body: formData,
+            });
+            const data = await res.json();
+            const botMsg = { sender: "bot", text: data.message };
+            setMessages((prev) => [...prev, botMsg]);
+        };
+
 
         return React.createElement(
             "div",
