@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'chatbot',  # ✅ Add your chatbot app here
+    'reports',  # ✅ Add your reports app here
 ]
 
 MIDDLEWARE = [

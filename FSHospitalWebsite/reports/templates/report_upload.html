@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload Medical Report</title>
+</head>
+<body>
+    <h1>Upload Patient Medical Report</h1>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label>Select PDF Report:</label><br>
+        <input type="file" name="report_file" accept=".pdf" required><br><br>
+        <button type="submit">Upload Report</button>
+    </form>
+</body>
+</html>

@@ -1,6 +1,8 @@
-from django.urls import include, path
+from django.contrib import admin
+from django.urls import path, include
 
 urlpatterns = [
+    path('admin/', admin.site.urls),
     path('chatbot/', include('chatbot.urls')),
-    # ... other routes
+    path('reports/', include('reports.urls')),  # ✅ Add this line
 ]

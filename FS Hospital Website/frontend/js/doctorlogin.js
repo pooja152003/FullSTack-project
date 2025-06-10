@@ -9,7 +9,7 @@ document.getElementById("doctorLoginForm").addEventListener("submit", function(e
   }
 
   // Placeholder for actual login logic
-  window.location.href = 'admin.html';
+  window.location.href = 'doctorview.html';
 
   // TODO: Implement authentication & redirect
 });
