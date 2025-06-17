@@ -356,31 +356,26 @@ app.post('/api/admin/login', (req, res) => {
 
 // --- User Registration ---
 app.post('/api/users/register', (req, res) => {
-  const { name, username, email, phone, password, role = 'patient' } = req.body; // Changed 'name' to 'name' to match DB schema and added default role
+  const { name, username, email, phone, password, role = 'patient' } = req.body;
   console.log('Register request:', { name, username, email, phone, role, password: '***' });
 
-  // Detailed validation
+  // Validation (unchanged from your code)
   const missingFields = [];
-  if (!name) missingFields.push('name'); // Use name here
+  if (!name) missingFields.push('name');
   if (!username) missingFields.push('username');
   if (!email) missingFields.push('email');
   if (!password) missingFields.push('password');
-  // Role can have a default, so it might not always be required in the request body if the default is acceptable.
-  // If role is strictly required from input:
-  // if (!role) missingFields.push('role'); 
 
   if (missingFields.length > 0) {
     console.error('Missing fields:', missingFields.join(', '));
     return res.status(400).json({ error: `Missing required fields: ${missingFields.join(', ')}` });
   }
 
-  // Basic email format validation (optional, but good practice)
+  // Email and password validation (unchanged from your code)
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return res.status(400).json({ error: "Invalid email format!" });
   }
 
-  // Password strength validation (optional, but good practice)
-  // Example: minimum 8 characters, at least one letter, one number, one special character
   if (!/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/.test(password)) {
     return res.status(400).json({ 
       error: "Password must be at least 8 characters, contain a letter, a number, and a special character." 
@@ -390,7 +385,7 @@ app.post('/api/users/register', (req, res) => {
   db.get(
     `SELECT id FROM users WHERE username = ? OR email = ?`,
     [username, email],
-    async (err, row) => { // <-- Made this an async function because bcrypt.hash is async
+    async (err, row) => {
       if (err) {
         console.error('Duplicate check error:', err.message);
         return res.status(500).json({ error: 'Database error' });
@@ -401,22 +396,29 @@ app.post('/api/users/register', (req, res) => {
       }
 
       try {
-        // HASH THE PASSWORD BEFORE STORING IT!
-        const hashedPassword = await bcrypt.hash(password, 10); // 10 is a good salt rounds value
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const id = require('crypto').randomUUID();
 
-        const id = require('crypto').randomUUID(); // Use UUID for better IDs than Date.now()
         db.run(
-          `INSERT INTO users (id, name, username, email, phone, password, role) VALUES (?, ?, ?, ?, ?, ?, ?)`, // Use name here
-          [id, name, username, email, phone || null, hashedPassword, role], // <-- Store the HASHTED password
+          `INSERT INTO users (id, name, username, email, phone, password, role) VALUES (?, ?, ?, ?, ?, ?, ?)`,
+          [id, name, username, email, phone || null, hashedPassword, role],
           function (err) {
             if (err) {
               console.error('Insert error:', err.message);
-              return res.status(500).json({ error: 'Failed to register user: ' + err.message }); // More generic error for client
+              return res.status(500).json({ error: 'Failed to register user: ' + err.message });
             }
             console.log('User registered:', { id, username });
+            
+            // Send ONE response with all necessary user data
             res.status(201).json({ 
-                message: 'User registered successfully', 
-                user: { id, username, email, role } // Send back non-sensitive user info
+              message: 'User registered successfully',
+              user: {
+                id: id,
+                name: name,
+                username: username,
+                email: email,
+                role: role
+              }
             });
           }
         );
@@ -427,6 +429,7 @@ app.post('/api/users/register', (req, res) => {
     }
   );
 });
+
 // --- Patient Login ---
 app.post('/api/patient/login', (req, res) => {
   const { username, password } = req.body;
