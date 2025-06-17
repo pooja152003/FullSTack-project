@@ -3,26 +3,37 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Patient Dashboard</title>
+  <title>Patient Dashboard | Oasis Medicity</title>
   <link rel="stylesheet" href="css/patientdashboard.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
   <div class="dashboard">
     <!-- Sidebar -->
     <aside class="sidebar">
-      <h2 class="logo">MyHealth</h2>
+      <div class="logo-container">
+        <img src="../images/logo.jpg" alt="Oasis Logo" class="logo-img">
+        <h2 class="logo-text">Oasis Medicity</h2>
+      </div>
+      <div class="user-profile">
+        <img src="../images/user-avatar.png" alt="User Avatar" id="userAvatar">
+        <div>
+          <h3 id="sidebarUserName">Loading...</h3>
+          <p>Patient</p>
+        </div>
+      </div>
       <nav>
         <ul>
-          <li><a href="patient_dashboard.html" class="active">Dashboard</a></li>
-          <li><a href="profile.html">Profile</a></li>
-          <li><a href="appoint_history.html">Appointment History</a></li>
-          <li><a href="medreport.html">Medical Reports</a></li>
-          <li><a href="prescription.html">Prescriptions</a></li>
-          <li><a href="billing.html">Billing</a></li>
-          <li><a href="notification.html">Notifications</a></li>
-          <li><a href="#" id="logoutBtn">Logout</a></li>        
+          <li><a href="patient_dashboard.html" class="active"><i class="fas fa-home"></i> Dashboard</a></li>
+          <li><a href="profile.html"><i class="fas fa-user"></i> Profile</a></li>
+          <li><a href="appoint_history.html"><i class="fas fa-calendar-check"></i> Appointments</a></li>
+          <li><a href="medreport.html"><i class="fas fa-file-medical"></i> Medical Reports</a></li>
+          <li><a href="prescription.html"><i class="fas fa-prescription-bottle"></i> Prescriptions</a></li>
+          <li><a href="billing.html"><i class="fas fa-receipt"></i> Billing</a></li>
+          <li><a href="notification.html"><i class="fas fa-bell"></i> Notifications</a></li>
+          <li><a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</a></li>        
         </ul>
       </nav>
     </aside>
@@ -30,73 +41,84 @@
     <!-- Main Content -->
     <main class="main-content">
       <header>
-        <h1>Welcome, Patient Name</h1>
-        <p>Here's an overview of your recent activity</p>
+        <div class="header-content">
+          <h1 id="welcomeMsg">Welcome back!</h1>
+          <p id="lastLogin">Last login: Loading...</p>
+        </div>
+        <div class="header-actions">
+          <button class="btn primary" id="newAppointmentBtn">
+            <i class="fas fa-plus"></i> New Appointment
+          </button>
+        </div>
       </header>
 
       <section class="cards">
-        <div class="card">
-          <h3>Next Appointment</h3>
-          <p>12 May 2025, 11:00 AM with Dr. Smith</p>
+        <div class="card upcoming-appointments">
+          <div class="card-header">
+            <h3><i class="fas fa-calendar-alt"></i> Next Appointment</h3>
+            <a href="appoint_history.html">View All</a>
+          </div>
+          <div class="card-body" id="nextAppointment">
+            <p>No upcoming appointments</p>
+          </div>
         </div>
-        <div class="card">
-          <h3>Recent Report</h3>
-          <p>Blood Test uploaded on 5 May 2025</p>
+        
+        <div class="card recent-reports">
+          <div class="card-header">
+            <h3><i class="fas fa-file-medical"></i> Recent Report</h3>
+            <a href="medreport.html">View All</a>
+          </div>
+          <div class="card-body" id="recentReport">
+            <p>No recent reports</p>
+          </div>
         </div>
-        <div class="card">
-          <h3>Prescriptions</h3>
-          <p>3 active prescriptions</p>
+        
+        <div class="card prescriptions">
+          <div class="card-header">
+            <h3><i class="fas fa-prescription-bottle-alt"></i> Prescriptions</h3>
+            <a href="prescription.html">View All</a>
+          </div>
+          <div class="card-body" id="prescriptions">
+            <p>No active prescriptions</p>
+          </div>
         </div>
-        <div class="card">
-          <h3>Pending Bills</h3>
-          <p>₹1,200 due</p>
+        
+        <div class="card billing">
+          <div class="card-header">
+            <h3><i class="fas fa-rupee-sign"></i> Pending Bills</h3>
+            <a href="billing.html">View All</a>
+          </div>
+          <div class="card-body" id="pendingBills">
+            <p>No pending bills</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="recent-activity">
+        <h2><i class="fas fa-history"></i> Recent Activity</h2>
+        <div class="activity-list" id="recentActivity">
+          <div class="activity-item loading">
+            <div class="activity-content">
+              <p>Loading your activity...</p>
+            </div>
+          </div>
         </div>
       </section>
     </main>
   </div>
 
-  <!-- Logout Button Trigger -->
-
-<!-- Logout Confirmation Modal -->
-<div id="logoutModal" class="modal">
-  <div class="modal-content">
-    <h2>Confirm Logout</h2>
-    <p>Are you sure you want to logout?</p>
-    <div class="modal-actions">
-      <button id="confirmLogout" class="btn confirm">Yes, Logout</button>
-      <button id="cancelLogout" class="btn cancel">Cancel</button>
+  <!-- Logout Confirmation Modal -->
+  <div id="logoutModal" class="modal">
+    <div class="modal-content">
+      <h2><i class="fas fa-sign-out-alt"></i> Confirm Logout</h2>
+      <p>Are you sure you want to logout?</p>
+      <div class="modal-actions">
+        <button id="cancelLogout" class="btn outline"><i class="fas fa-times"></i> Cancel</button>
+        <button id="confirmLogout" class="btn danger"><i class="fas fa-sign-out-alt"></i> Logout</button>
+      </div>
     </div>
   </div>
-</div>
-<script>
-  const logoutBtn = document.getElementById('logoutBtn');
-  const logoutModal = document.getElementById('logoutModal');
-  const cancelLogout = document.getElementById('cancelLogout');
-  const confirmLogout = document.getElementById('confirmLogout');
 
-  // Open modal
-  logoutBtn.onclick = () => {
-    logoutModal.style.display = 'block';
-  };
-
-  // Close modal
-  cancelLogout.onclick = () => {
-    logoutModal.style.display = 'none';
-  };
-
-  // Confirm logout
-  confirmLogout.onclick = () => {
-    window.location.href = '../index.html';
-  };
-  
-
-  // Close if clicked outside modal
-  window.onclick = (e) => {
-    if (e.target == logoutModal) {
-      logoutModal.style.display = 'none';
-    }
-  };
-</script>
-
+  <script src="js/patientdashboard.js"></script>
 </body>
 </html>
