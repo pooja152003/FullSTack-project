@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const password = document.getElementById('password').value.trim();
       const confirmPassword = document.getElementById('confirmPassword').value.trim();
       const role = document.getElementById('role').value.trim();
+      
 
       // Client-side validation
       if (!name || !username || !email || !phone || !password || !role) {
@@ -50,35 +51,39 @@ document.addEventListener('DOMContentLoaded', () => {
       // Prepare data for server (exclude confirmPassword)
       const data = { name, username, email, phone, password, role };
 
-      try {
-        const response = await fetch('http://localhost:3000/api/users/register', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data)
-        });
-
-        const result = await response.json();
-        console.log('Registration response:', result); // Log response
-
-        if (!response.ok) {
-          throw new Error(result.error || 'Registration failed');
-        }
-
-        // Registration successful
-        showSuccess('Registration successful! Redirecting...');
-        let redirectUrl = 'total-login.html'; // default
-        if (role === 'admin') {
-          redirectUrl = 'admin.html';
-        } else if (role === 'doctor') {
-          redirectUrl = 'doctors.html';
-        } else if (role === 'patient') {
-          redirectUrl = 'patientdashboard.html';
-        }
-
-        setTimeout(() => {
-          window.location.href = redirectUrl;
-        }, 1500);
-      } catch (error) {
+      // In your signup form submission handler
+try {
+  const response = await fetch('/api/users/register', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  });
+  
+  const result = await response.json();
+  
+  if (response.ok) {
+    // Store user data
+    localStorage.setItem('user', JSON.stringify(result.user));
+    
+    // Redirect based on role
+    switch(result.user.role) {
+      case 'patient':
+        window.location.href = 'patientdashboard.html';
+        break;
+      case 'doctor':
+        window.location.href = 'doctordashboard.html';
+        break;
+      case 'admin':
+        window.location.href = 'admindashboard.html';
+        break;
+      default:
+        window.location.href = 'index.html';
+    }
+  } else {
+    throw new Error(result.error || 'Registration failed');
+    }
+    }       
+      catch (error) {
         showError(error.message);
         console.error('Registration error:', error);
       } finally {

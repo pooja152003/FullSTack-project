@@ -5,57 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chatbot - Oasis Medicity</title>
     
-    <!-- Load React & Babel -->
-    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <link rel="stylesheet" href="css/chatbot.css">
 
-    <!-- Chatbot Styles -->
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding-top: 100px; /* Pushes content below the fixed navbar */
-        }
-        #chatbot-root {
-    margin: auto;
-    margin-bottom: 50px;
-    max-width: 400px;
-    background-color: white;
-    padding: 20px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-}
-        .user-message {
-            text-align: right;
-            background-color: #e0e0e0;
-            padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 10px;
-        }
-        .bot-message {
-            text-align: left;
-            background-color: #f0f0f0;
-            padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 10px;
-        }
-        .chatbot-container input {
-            width: calc(100% - 80px);
-            padding: 10px;
-            margin-right: 10px;
-            border-radius: 10px;
-            border: 1px solid #ccc;
-        }
-        .chatbot-container button {
-            padding: 10px 20px;
-            border-radius: 10px;
-            border: none;
-            background-color: #007BFF;
-            color: white;
-        }
-    </style>
 </head>
 <body>
     <div class="main">
@@ -92,6 +43,12 @@
   
 <script>
   async function sendMessage() {
+    const userInputField = document.getElementById("user-input");
+    handleSendMessage(userInputField.value);
+    userInputField.value = ""; // Clear input after sending
+  }
+
+  async function handleSendMessage(messageText) {
     const input = document.getElementById("user-input");
     const message = input.value.trim();
     if (message === "") return;
@@ -100,10 +57,9 @@
 
     const userMsg = document.createElement("div");
     userMsg.className = "message user-message";
-    userMsg.textContent = message;
+    userMsg.textContent = messageText;
     messagesDiv.appendChild(userMsg);
-
-    input.value = "";
+    messagesDiv.scrollTop = messagesDiv.scrollHeight; // Scroll after adding user message
 
     // Send message to backend
     try {
@@ -120,18 +76,22 @@
       botMsg.className = "message bot-message";
       botMsg.textContent = data.reply || "Sorry, I didn't understand that.";
       messagesDiv.appendChild(botMsg);
-      messagesDiv.scrollTop = messagesDiv.scrollHeight;
     } catch (error) {
       const botMsg = document.createElement("div");
       botMsg.className = "message bot-message";
       botMsg.textContent = "Error connecting to chatbot server.";
       messagesDiv.appendChild(botMsg);
     }
-
     messagesDiv.scrollTop = messagesDiv.scrollHeight;
   }
-</script>
 
+  // Allow sending message with Enter key
+  document.getElementById("user-input").addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
+      event.preventDefault(); // Prevent default form submission if it were in a form
+      sendMessage();
+    }
+  });
+</script>
   </body>
-  
 </html>

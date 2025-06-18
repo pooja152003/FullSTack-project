@@ -84,18 +84,17 @@
   
   /* Chatbot Container */
   .chatbot-container {
-    width: 400px;
-    height: 600px;
+    width: 90%;
+    max-width: 500px; /* Adjusted for better page view */
+    height: 70vh; /* Adjusted for page view */
+    min-height: 400px;
     background: #ffffff;
     border-radius: 10px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
+    margin: 30px auto; /* Centering for page view */
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    z-index: 999;
   }
   
   /* Chatbot Header */
