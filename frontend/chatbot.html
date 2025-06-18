@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot - Oasis Medicity</title>
+    
+    <link rel="stylesheet" href="css/chatbot.css">
+
+</head>
+<body>
+    <div class="main">
+      <div class="navbar">
+        <div class="icon">
+          <h2 class="logo">
+            <img src="images/logo.jpg" alt="Oasis Logo">
+            <span style="color: #034058">OasIs</span><br>
+            <span style="color: teal">Medicity</span>
+          </h2>
+        </div>
+  
+        <div class="menu">
+          <ul>
+            <li><a href="index.html">HOME</a></li>
+            <li><a href="about.html">ABOUT</a></li>
+            <li><a href="contact.html">CONTACT</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Chatbot Container -->
+    <div class="chatbot-container">
+      <div class="chatbot-header">Oasis Medicity Chatbot</div>
+      <div class="chatbot-messages" id="chatbot-messages">
+        <!-- Messages will be inserted here -->
+      </div>
+      <div class="chatbot-input">
+        <input type="text" id="user-input" placeholder="Type your message...">
+        <button onclick="sendMessage()">Send</button>
+      </div>
+    </div>
+  
+<script>
+  async function sendMessage() {
+    const userInputField = document.getElementById("user-input");
+    handleSendMessage(userInputField.value);
+    userInputField.value = ""; // Clear input after sending
+  }
+
+  async function handleSendMessage(messageText) {
+    const input = document.getElementById("user-input");
+    const message = input.value.trim();
+    if (message === "") return;
+
+    const messagesDiv = document.getElementById("chatbot-messages");
+
+    const userMsg = document.createElement("div");
+    userMsg.className = "message user-message";
+    userMsg.textContent = messageText;
+    messagesDiv.appendChild(userMsg);
+    messagesDiv.scrollTop = messagesDiv.scrollHeight; // Scroll after adding user message
+
+    // Send message to backend
+    try {
+      const response = await fetch('http://127.0.0.1:5000/chat', { // Update URL if needed
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ message })
+      });
+      const data = await response.json();
+
+      const botMsg = document.createElement("div");
+      botMsg.className = "message bot-message";
+      botMsg.textContent = data.reply || "Sorry, I didn't understand that.";
+      messagesDiv.appendChild(botMsg);
+    } catch (error) {
+      const botMsg = document.createElement("div");
+      botMsg.className = "message bot-message";
+      botMsg.textContent = "Error connecting to chatbot server.";
+      messagesDiv.appendChild(botMsg);
+    }
+    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+  }
+
+  // Allow sending message with Enter key
+  document.getElementById("user-input").addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
+      event.preventDefault(); // Prevent default form submission if it were in a form
+      sendMessage();
+    }
+  });
+</script>
+  </body>
+</html>

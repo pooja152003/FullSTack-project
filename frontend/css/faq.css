@@ -1,0 +1,173 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+@font-face {
+    font-family: 'CustomFont';
+    src: url('./images/bold.ttf') format('truetype');
+  }
+  
+  .logo {
+    font-family: 'CustomFont', sans-serif;
+    font-size: 28px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo img {
+    height: 40px;
+    margin-right: 10px;
+  }
+  
+.banner {
+    width: 100%;
+    min-height: 100vh; /* Ensures background covers full screen */
+    position: relative;
+    background: 
+        linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+        url("../images/indeximg.jpg") no-repeat center center;
+    background-size: cover;
+    background-attachment: fixed; /* Makes sure the image stays even when scrolling */
+}
+
+.banner::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(3px); /* Applies a blur effect */
+}
+
+/* Navbar Styling */
+.navbar {
+    width: 85%;
+    margin: auto;
+    padding: 35px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    z-index: 100;
+    background-color:#d1e7f2;
+    padding: 20px;
+}
+
+.icon {
+    width: 200px;
+    float: left;
+}
+
+.logo {
+    color: #f8fbf8;
+    font-size: 35px;
+    font-family: Arial;
+    padding-left: 20px;
+}
+
+/* Navigation */
+.navbar ul {
+    display: flex;
+    list-style: none;
+}
+
+.navbar ul li {
+    margin: 0 20px;
+}
+
+.navbar ul li a {
+    text-decoration: none;
+    color: #061359;
+    text-transform: uppercase;
+    font-weight:bold;
+}
+
+.navbar ul li::after {
+    content: '';
+    height: 3px;
+    width: 0%;
+    background: #007165;
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    transition: 0.5s;
+}
+
+.navbar ul li:hover::after {
+    width: 100%;
+}
+
+/* FAQ Content */
+.content {
+    width: 100%;
+    text-align: center;
+    color: #fff;
+    padding: 50px 0; /* Adds breathing room */
+}
+.heading {
+    display: block; /* Ensures proper spacing */
+    background: none;
+    text-align: center;
+    font-size: 28px;
+    color: #ffffff; /* Adjust text color for visibility */
+    padding-bottom: 15px;
+}
+
+.faq-container {
+    width: 80%;
+    margin: auto;
+    padding: 30px;
+    background: #ffffff1a;
+    border-radius: 10px;
+    position: relative;
+    margin-top: 20px; /* Creates space below navbar */
+}
+/* FAQ Items */
+.faq-item {
+    padding: 15px;
+    background: rgba(240, 248, 255, 0.2);
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.faq-item h3 {
+    color: #f8fbf8;
+    font-size: 30px;
+}
+
+.faq-item p {
+    font-size: 20px;
+    color: #d1e7f2;
+}
+.faq-item:hover{
+    background-color: #12a1935d;
+    transition: 0.5s ease-in-out;
+    
+
+}
+
+/* Buttons */
+.button-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.small-btn {
+    display: inline-block;
+    padding: 10px 16px;
+    background: #009688;
+    color: white;
+    border: none;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.small-btn:hover {
+    background: #007165;
+}
+

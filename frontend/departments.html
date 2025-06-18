@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Our Medical Departments</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:700,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/dept.css">
+  <style>
+    /* Minimal grid for demonstration */
+    .departments-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px;
+      justify-content: center;
+      padding: 60px 20px 20px 20px;
+      min-height: 100vh;
+      background: #f2f4f8;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">
+      <img src="images/logo.jpg" alt="Oasis Logo">
+      <span>OasIs</span>
+      <span>Medicity</span>
+    </div>
+    <button class="hamburger" aria-label="Open Menu" onclick="toggleMenu()">&#9776;</button>
+    <div class="nav-links">
+      <a href="index.html">HOME</a>
+      <a href="about.html">ABOUT</a>
+      <a href="contact.html">CONTACT</a>
+    </div>
+  </nav>
+
+  <!-- Departments Grid -->
+  <div class="departments-grid" id="departmentsGrid"></div>
+
+  <script>
+    // Hamburger menu toggle for mobile
+    function toggleMenu() {
+      document.querySelector('.nav-links').classList.toggle('active');
+    }
+
+    // Department data with color variables for each card
+    const departments = [
+      { name: "Cardiology", description: "Heart and cardiovascular system.", icon: "https://img.icons8.com/color/96/heart-with-pulse.png", bg: "#ffd861", bgLight: "#ffeeba", shadow: "rgba(255, 215, 97, 0.48)" },
+      { name: "Neurology", description: "Brain and nervous system.", icon: "https://img.icons8.com/color/96/brain.png", bg: "#B8F9D3", bgLight: "#e2fced", shadow: "rgba(184, 249, 211, 0.48)" },
+      { name: "Orthopedics", description: "Bones and muscles.", icon: "https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/external-orthopedic-medical-and-healthcare-flaticons-lineal-color-flat-icons.png", bg: "#CEB2FC", bgLight: "#F0E7FF", shadow: "rgba(206, 178, 252, 0.48)" },
+      { name: "Gynecology", description: "Women's reproductive health.", icon: "https://img.icons8.com/color/48/periods.png", bg: "#DCE9FF", bgLight: "#f1f7ff", shadow: "rgba(220, 233, 255, 0.48)" },
+      { name: "Ophthalmology", description: "Eye and vision care.", icon: "https://img.icons8.com/dusk/64/ophthalmology.png", bg: "#ffd861", bgLight: "#ffeeba", shadow: "rgba(255, 215, 97, 0.48)" },
+      { name: "Pediatrics", description: "Child healthcare.", icon: "https://img.icons8.com/color/96/baby.png", bg: "#B8F9D3", bgLight: "#e2fced", shadow: "rgba(184, 249, 211, 0.48)" },
+      { name: "ENT", description: "Ear, nose, and throat.", icon: "https://img.icons8.com/pulsar-color/48/ear-ache.png", bg: "#CEB2FC", bgLight: "#F0E7FF", shadow: "rgba(206, 178, 252, 0.48)" },
+      { name: "Pulmonology", description: "Lungs and respiratory system.", icon: "https://img.icons8.com/color/96/lungs.png", bg: "#DCE9FF", bgLight: "#f1f7ff", shadow: "rgba(220, 233, 255, 0.48)" },
+      { name: "Gastroenterology", description: "Digestive system.", icon: "https://img.icons8.com/color/96/stomach.png", bg: "#ffd861", bgLight: "#ffeeba", shadow: "rgba(255, 215, 97, 0.48)" },
+      { name: "Psychiatry", description: "Mental health.", icon: "https://img.icons8.com/color/96/mental-health.png", bg: "#B8F9D3", bgLight: "#e2fced", shadow: "rgba(184, 249, 211, 0.48)" },
+      { name: "Urology", description: "Urinary tract and male organs.", icon: "https://img.icons8.com/color/96/kidney.png", bg: "#CEB2FC", bgLight: "#F0E7FF", shadow: "rgba(206, 178, 252, 0.48)" }
+    ];
+
+    const grid = document.getElementById('departmentsGrid');
+    departments.forEach(dept => {
+      const card = document.createElement('div');
+      card.className = 'department-card';
+      card.tabIndex = 0;
+      card.style.setProperty('--bg-color', dept.bg);
+      card.style.setProperty('--bg-color-light', dept.bgLight);
+      card.style.setProperty('--box-shadow-color', dept.shadow);
+      card.innerHTML = `
+        <div class="icon-circle">
+          <img src="${dept.icon}" class="department-icon" alt="${dept.name} icon">
+        </div>
+        <div class="overlay"></div>
+        <div class="department-title">${dept.name}</div>
+        <div class="department-description">${dept.description}</div>
+      `;
+      grid.appendChild(card);
+    });
+
+    // Close menu when clicking outside on mobile
+    document.addEventListener('click', function(e) {
+      const nav = document.querySelector('.nav-links');
+      const ham = document.querySelector('.hamburger');
+      if (window.innerWidth <= 600 && nav.classList.contains('active')) {
+        if (!nav.contains(e.target) && !ham.contains(e.target)) {
+          nav.classList.remove('active');
+        }
+      }
+    });
+  </script>
+</body>
+</html>

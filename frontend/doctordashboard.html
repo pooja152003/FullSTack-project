@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Doctor Dashboard | Oasis Medicity</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="css/doctordashboard.css">
+</head>
+<body>
+  <div class="dashboard-container">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <img src="images/logo.jpg" alt="Hospital Logo" class="logo">
+        <div class="hospital-info">
+          <h2>Oasis Medicity</h2>
+          <p>Doctor Panel</p>
+        </div>
+      </div>
+
+      <div class="user-profile">
+        <img src="images/doctor-avatar.png" alt="Doctor Avatar" id="doctorAvatar">
+        <div>
+          <h3 id="doctorName">Dr. Loading...</h3>
+          <p id="doctorSpecialization">Specialization</p>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <ul>
+          <li class="active" data-section="dashboard">
+            <i class="fas fa-tachometer-alt"></i> Dashboard
+          </li>
+          <li data-section="patients">
+            <i class="fas fa-procedures"></i> My Patients
+          </li>
+          <li data-section="appointments">
+            <i class="fas fa-calendar-check"></i> Appointments
+          </li>
+          <li data-section="prescriptions">
+            <i class="fas fa-prescription-bottle-alt"></i> Prescriptions
+          </li>
+          <li data-section="schedule">
+            <i class="fas fa-calendar-alt"></i> My Schedule
+          </li>
+          <li data-section="reports">
+            <i class="fas fa-file-medical"></i> Medical Reports
+          </li>
+          <li data-section="messages">
+            <i class="fas fa-comments"></i> Messages
+          </li>
+        </ul>
+      </nav>
+
+      <div class="sidebar-footer">
+        <button id="logoutBtn">
+          <i class="fas fa-sign-out-alt"></i> Logout
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <header class="main-header">
+        <div class="header-title">
+          <h1 id="contentTitle">Dashboard</h1>
+          <p id="contentSubtitle">Overview of your activities</p>
+        </div>
+        <div class="header-actions">
+          <div class="notification-bell">
+            <i class="fas fa-bell"></i>
+            <span class="notification-count">3</span>
+          </div>
+          <div class="current-time" id="currentTime"></div>
+        </div>
+      </header>
+
+      <!-- Dashboard Content Sections -->
+      <section class="content-section" id="dashboardSection">
+        <div class="stats-cards">
+          <div class="stat-card">
+            <div class="stat-icon bg-blue">
+              <i class="fas fa-calendar-day"></i>
+            </div>
+            <div class="stat-info">
+              <h3 id="todayAppointments">0</h3>
+              <p>Today's Appointments</p>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon bg-green">
+              <i class="fas fa-procedures"></i>
+            </div>
+            <div class="stat-info">
+              <h3 id="totalPatients">0</h3>
+              <p>Patients Under Care</p>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon bg-orange">
+              <i class="fas fa-file-medical"></i>
+            </div>
+            <div class="stat-info">
+              <h3 id="pendingReports">0</h3>
+              <p>Pending Reports</p>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon bg-purple">
+              <i class="fas fa-prescription-bottle"></i>
+            </div>
+            <div class="stat-info">
+              <h3 id="activePrescriptions">0</h3>
+              <p>Active Prescriptions</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="dashboard-grid">
+          <div class="card upcoming-appointments">
+            <div class="card-header">
+              <h3><i class="fas fa-calendar-day"></i> Today's Appointments</h3>
+              <a href="#" class="view-all">View All</a>
+            </div>
+            <div class="card-body">
+              <div class="appointments-list" id="todayAppointmentsList">
+                <div class="loading-spinner"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card recent-patients">
+            <div class="card-header">
+              <h3><i class="fas fa-user-injured"></i> Recent Patients</h3>
+              <a href="#" class="view-all">View All</a>
+            </div>
+            <div class="card-body">
+              <div class="patients-list" id="recentPatientsList">
+                <div class="loading-spinner"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Patients Section -->
+      <section class="content-section" id="patientsSection" style="display: none;">
+        <div class="section-header">
+          <h2>My Patients</h2>
+          <div class="section-actions">
+            <div class="search-box">
+              <i class="fas fa-search"></i>
+              <input type="text" placeholder="Search patients..." id="patientSearch">
+            </div>
+            <button class="btn primary">
+              <i class="fas fa-plus"></i> New Patient
+            </button>
+          </div>
+        </div>
+        <div class="table-container">
+          <table id="patientsTable">
+            <thead>
+              <tr>
+                <th>Patient ID</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Condition</th>
+                <th>Last Visit</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Data will be loaded via JavaScript -->
+            </tbody>
+          </table>
+          <div class="table-footer">
+            <div class="pagination-controls">
+              <button class="btn outline" id="prevPageBtn" disabled>
+                <i class="fas fa-chevron-left"></i>
+              </button>
+              <span id="pageInfo">Page 1 of 1</span>
+              <button class="btn outline" id="nextPageBtn" disabled>
+                <i class="fas fa-chevron-right"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Other sections (Appointments, Prescriptions, Schedule, Reports) would follow similar structure -->
+      
+      <!-- Appointments Section -->
+      <section class="content-section" id="appointmentsSection" style="display: none;">
+        <!-- Content loaded via JavaScript -->
+      </section>
+
+      <!-- Loading Overlay -->
+      <div class="loading-overlay" id="loadingOverlay">
+        <div class="spinner"></div>
+        <p>Loading data...</p>
+      </div>
+    </main>
+  </div>
+
+  <!-- Logout Confirmation Modal -->
+  <div class="modal" id="logoutModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Confirm Logout</h3>
+        <button class="close-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Are you sure you want to logout from the system?</p>
+      </div>
+      <div class="modal-footer">
+        <button class="btn outline" id="cancelLogout">Cancel</button>
+        <button class="btn danger" id="confirmLogout">Logout</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/doctordashboard.js"></script>
+</body>
+</html>

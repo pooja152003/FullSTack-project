@@ -1,0 +1,126 @@
+@font-face {
+  font-family: 'CustomFont';
+  src: url('./images/bold.ttf') format('truetype');
+}
+
+.logo {
+  font-family: 'CustomFont', sans-serif;
+  font-size: 28px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  height: 40px;
+  margin-right: 10px;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.banner {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(../images/indeximg.jpg);
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+  padding: 10px;
+  color: white;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 40px;
+  background-color: rgba(199, 229, 235, 0.795);
+
+}
+
+/* .logo {
+  font-size: 30px;
+  color: #fff;
+  font-weight: bold;
+  line-height: 1.2;
+} */
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+}
+
+.navbar ul li a {
+  color: #034058;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-family: Arial;
+  font-weight: bold;
+}
+
+.navbar ul li a:hover {
+  color: #ffffff;
+}
+
+.menu-btn {
+  display: none;
+  font-size: 24px;
+  color: white;
+  cursor: pointer;
+}
+
+.about-content {
+  max-width: 1300px;
+  margin: 80px auto;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 40px;
+  border-radius: 10px;
+  backdrop-filter: blur(5px);
+}
+
+.about-content h1 {
+  font-size: 36px;
+  margin-bottom: 20px;
+  color: #00e5ff;
+}
+
+.about-content h2 {
+  font-size: 24px;
+  margin-top: 30px;
+  color: #1de9b6;
+}
+
+.about-content p,
+.about-content ul {
+  font-size: 16px;
+  line-height: 1.7;
+  margin-top: 10px;
+}
+
+.about-content ul {
+  padding-left: 20px;
+}
+
+@media (max-width: 768px) {
+  .navbar ul {
+    display: none;
+    flex-direction: column;
+    background-color: rgba(0,0,0,0.7);
+    position: absolute;
+    top: 70px;
+    right: 20px;
+    padding: 15px;
+    border-radius: 8px;
+  }
+
+  .navbar ul.open {
+    display: flex;
+  }
+
+  .menu-btn {
+    display: block;
+  }
+}

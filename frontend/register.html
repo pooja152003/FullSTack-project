@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>User Registration</title>
+  <link rel="stylesheet" href="css/registerstyle.css" />
+  
+  <!-- Re-add Ionicons -->
+  
+</head>
+<body style="background: url('images/registerimg.jpg') no-repeat center center fixed; background-size: cover; height: 100vh;">
+    
+    <div class="navbar">
+        <div class="icon">
+            <h2 class="logo">
+              <img src="images/logo.jpg" alt="Oasis Logo">
+                <span style="color: #034058 ">OasIs</span><br>
+                <span style="color: #008080 ">Medicity</span>
+              </h2>
+                      </div>
+
+        <div class="menu">
+            <ul>
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="about.html">ABOUT</a></li>
+                <li><a href="departments.html">MEDICAL SERVICES</a></li>
+                <li><a href="contact.html">CONTACT</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="form">
+            <h2>Register Here</h2>
+            <form id="registrationForm">
+                <input type="text" id="name" name="name" placeholder="Full Name" required>
+                <input type="text" id="username"name="username" placeholder="Username" required>
+                <input type="email" id="email" name="email" placeholder="Email" required>
+                <input type="tel" id="phone"name="phone" placeholder="Phone Number" required pattern="[0-9]{10}">
+                <input type="password" id="password" name="password" placeholder="Password" required>
+                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required>
+                <select id="role" name="role" required>
+                    <option value="">Select Role</option>
+                    <option value="patient">Patient</option>
+                    <option value="admin">Admin</option>
+                    <option value="doctor">Doctor</option>
+                    <option value="staff">Staff</option>
+                    </select>
+                <button class="btnn" type="submit">Sign Up</button>
+            </form>
+            <div id="form-message"></div>
+            <p class="link">Already have an account?<br>
+                <a href="login.html">Login here</a>
+            </p>
+            <p class="liw" >or Sign up with</p>
+            <div class="icons">
+                <a href="#"><ion-icon name="logo-facebook"></ion-icon></a>
+                <a href="#"><ion-icon name="logo-instagram"></ion-icon></a>
+                <a href="#"><ion-icon name="logo-twitter"></ion-icon></a>
+                <a href="#"><ion-icon name="logo-google"></ion-icon></a>
+                <a href="#"><ion-icon name="logo-skype"></ion-icon></a>
+            </div>
+        </div>
+    </div>
+    <script src="js/register.js"></script>
+
+</body>
+</html>

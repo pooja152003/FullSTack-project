@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Oasis Medicity - Home</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+   <link rel="stylesheet" href="css/indexstyles.css">
+  <!-- React and Babel -->
+  <script src="https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@babel/standalone@7.22.9/babel.min.js"></script>
+  <script src="chatbot.html"></script>
+ 
+</head>
+<body>
+  <div id="root"></div>
+  <script type="text/babel">
+    function Navbar() {
+      const [isOpen, setIsOpen] = React.useState(false);
+      const toggleMenu = () => setIsOpen(!isOpen);
+
+      React.useEffect(() => {
+        const navbar = document.querySelector('.navbar');
+        const handleScroll = () => {
+          if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+          } else {
+            navbar.classList.remove('scrolled');
+          }
+        };
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+      }, []);
+
+      return (
+        <nav className="navbar fixed w-full bg-teal-600 text-white p-4 flex justify-between items-center z-50">
+          
+            
+          <div class="logo">
+            <img src="images/logo.jpg"/> 
+            <span>OasIs</span>
+            <span>Medicity</span>
+          </div>
+
+          <div className="hamburger text-2xl md:hidden cursor-pointer" onClick={toggleMenu}>☰</div>
+          <ul className={`nav-links ${isOpen ? 'active' : ''} md:flex space-x-4`}>
+            <li><a href="contact.html" className="hover:text-teal-200">CONTACT</a></li>
+            <li><a href="about.html" className="hover:text-teal-200">ABOUT</a></li>
+            <li><a href="faq.html" className="hover:text-teal-200">FAQ</a></li>
+            <li><a href="register.html" className="hover:text-teal-200">REGISTER</a></li>
+            <li><a href="login.html" className="hover:text-teal-200">LOGIN</a></li>
+          </ul>
+        </nav>
+      );
+    }
+
+    function Hero() {
+      const [showAdminLogin, setShowAdminLogin] = React.useState(false);
+      const handleAdminLogin = (e) => {
+        e.preventDefault();
+        alert('Admin/Doctor Login: Redirecting to secure portal...');
+        // Add actual login logic here
+      };
+
+      return (
+        <section className="hero-bg h-screen flex items-center justify-center text-white">
+          <div className="text-center px-4">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">Welcome to Oasis Medicity</h1>
+            <h2 className="text-2xl md:text-3xl mb-4">Comprehensive, Compassionate Care</h2>
+            <p className="text-lg mb-6 max-w-2xl mx-auto">
+              A state-of-the-art multispeciality hospital committed to delivering advanced medical care with empathy and excellence.
+            </p>
+            <div className="flex flex-wrap justify-center gap-4 mb-6">
+              <a href="appointments.html">
+                <button className="custom-btn text-white font-semibold">
+                  <i className="fa fa-calendar mr-2"></i> Book Appointments
+                </button>
+              </a>
+              <a href="doctors.html">
+                <button className="custom-btn text-white font-semibold">
+                  <i className="fa fa-stethoscope mr-2"></i> Meet Our Experts
+                </button>
+              </a>
+              <button
+                className="custom-btn chatbot-btn text-white font-semibold"
+                onClick={() => window.location.href = 'chatbot.html'}
+              >
+                <i className="fa fa-robot mr-2"></i> Chat with Us
+              </button>
+            </div>
+            <button
+              className="custom-btn admin-btn text-white font-semibold"
+              onClick={() => setShowAdminLogin(!showAdminLogin)}
+            >
+              <i className="fa fa-user-md mr-2"></i> Admin/Doctor Login
+            </button>
+            {showAdminLogin && (
+              <div className="mt-4 bg-white text-black p-6 rounded-lg max-w-md mx-auto shadow-lg">
+                <h3 className="text-xl font-bold mb-4">Admin/Doctor Login</h3>
+                <div>
+                  <input
+                    type="text"
+                    placeholder="Username"
+                    className="w-full p-2 mb-4 border rounded focus:outline-none focus:ring-2 focus:ring-teal-600"
+                    required
+                  />
+                  <input
+                    type="password"
+                    placeholder="Password"
+                    className="w-full p-2 mb-4 border rounded focus:outline-none focus:ring-2 focus:ring-teal-600"
+                    required
+                  />
+                  <button
+                    type="submit"
+                    className="w-full custom-btn text-white font-semibold"
+                    onClick={handleAdminLogin}
+                  >
+                    Login
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+        </section>
+      );
+    }
+
+    function App() {
+      return (
+        <div>
+          <Navbar />
+          <Hero />
+        </div>
+      );
+    }
+
+    ReactDOM.render(<App />, document.getElementById('root'));
+  </script>
+</body>
+</html>
