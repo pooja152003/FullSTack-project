@@ -5,8 +5,71 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chatbot - Oasis Medicity</title>
     
+    <!-- Load React & Babel -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <link rel="stylesheet" href="css/chatbot.css">
 
+    <!-- Chatbot Styles -->
+    <style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh; /* Use viewport height to restrict body */
+    overflow-x: hidden;
+}
+
+        #chatbot-root {
+    margin: auto;
+    margin-bottom: 50px;
+    max-width: 400px;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+        .user-message {
+            text-align: right;
+            background-color: #e0e0e0;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+        }
+        .bot-message {
+            text-align: left;
+            background-color: #f0f0f0;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+        }
+    .chatbot-container {
+      bottom: 200px;
+      position:static;
+      width: 100%;
+      max-width: 500px;
+      background-color: #ffffff;
+      padding: 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      border-radius: 10px;
+    }
+
+        .chatbot-container input {
+            width: calc(100% - 80px);
+            padding: 10px;
+            margin-right: 10px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+        }
+        .chatbot-container button {
+            padding: 10px 20px;
+            border-radius: 10px;
+            border: none;
+            background-color: #007BFF;
+            color: white;
+        }
+    </style>
 </head>
 <body>
     <div class="main">
@@ -29,69 +92,95 @@
       </div>
     </div>
   
-    <!-- Chatbot Container -->
-    <div class="chatbot-container">
-      <div class="chatbot-header">Oasis Medicity Chatbot</div>
-      <div class="chatbot-messages" id="chatbot-messages">
-        <!-- Messages will be inserted here -->
-      </div>
-      <div class="chatbot-input">
-        <input type="text" id="user-input" placeholder="Type your message...">
-        <button onclick="sendMessage()">Send</button>
-      </div>
-    </div>
-  
+<!-- Chatbot Container -->
+<div class="chatbot-container">
+  <div class="chatbot-header">Oasis Medicity Chatbot</div>
+
+  <div class="chatbot-messages" id="chatbot-messages">
+    <!-- Messages will be inserted here -->
+  </div>
+
+  <div class="chatbot-input">
+    <input
+      type="text"
+      id="user-input"
+      placeholder="Type your message..."
+      onkeydown="if(event.key==='Enter') sendMessage()"
+    />
+    <button onclick="sendMessage()">Send</button>
+  </div>
+
+  <!-- This link will be updated dynamically -->
+  <div style="margin-top: 15px; text-align: right;">
+    <a
+      id="report-link"
+      href="#"
+      target="_blank"
+      style="color: #007BFF; text-decoration: underline; font-size: 15px; display: none;"
+    >
+      Click here for your report
+    </a>
+  </div>
+</div>
+
 <script>
-  async function sendMessage() {
-    const userInputField = document.getElementById("user-input");
-    handleSendMessage(userInputField.value);
-    userInputField.value = ""; // Clear input after sending
+async function sendMessage() {
+  const input = document.getElementById("user-input");
+  const chatbox = document.getElementById("chatbot-messages");  // Use the correct ID
+  const userText = input.value.trim();
+  if (!userText) return;
+
+  // Add user message
+  chatbox.innerHTML += `<div class="user-message"><strong>You:</strong> ${userText}</div>`;
+  input.value = "";
+
+  try {
+    const response = await fetch("http://127.0.0.1:3000/chat", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ message: userText })
+    });
+
+    const data = await response.json();
+
+    // Add bot reply
+    chatbox.innerHTML += `<div class="bot-message"><strong>Bot:</strong> ${data.reply || "No response"}</div>`;
+    chatbox.scrollTop = chatbox.scrollHeight;
+  } catch (error) {
+    chatbox.innerHTML += `<div class="bot-message"><strong>Bot:</strong> ❌ Could not connect to server.</div>`;
   }
+}
 
-  async function handleSendMessage(messageText) {
-    const input = document.getElementById("user-input");
-    const message = input.value.trim();
-    if (message === "") return;
-
-    const messagesDiv = document.getElementById("chatbot-messages");
-
-    const userMsg = document.createElement("div");
-    userMsg.className = "message user-message";
-    userMsg.textContent = messageText;
-    messagesDiv.appendChild(userMsg);
-    messagesDiv.scrollTop = messagesDiv.scrollHeight; // Scroll after adding user message
-
-    // Send message to backend
-    try {
-      const response = await fetch('http://127.0.0.1:5000/chat', { // Update URL if needed
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ message })
-      });
-      const data = await response.json();
-
-      const botMsg = document.createElement("div");
-      botMsg.className = "message bot-message";
-      botMsg.textContent = data.reply || "Sorry, I didn't understand that.";
-      messagesDiv.appendChild(botMsg);
-    } catch (error) {
-      const botMsg = document.createElement("div");
-      botMsg.className = "message bot-message";
-      botMsg.textContent = "Error connecting to chatbot server.";
-      messagesDiv.appendChild(botMsg);
+function downloadReport() {
+  fetch('http://127.0.0.1:3000/generate-report', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      name: 'Pooja',
+      symptoms: ['headache', 'fatigue'],
+      days: 3,
+      diagnosis: 'Hypoglycemia',
+      description: 'Low blood sugar condition.',
+      precautions: ['Drink sugary drinks', 'Consult doctor', 'Get enough rest']
+    })
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.success) {
+      const reportLink = document.getElementById("report-link");
+      reportLink.href = data.report_url;
+      reportLink.style.display = "inline";
+    } else {
+      alert("Failed to generate report: " + data.error);
     }
-    messagesDiv.scrollTop = messagesDiv.scrollHeight;
-  }
-
-  // Allow sending message with Enter key
-  document.getElementById("user-input").addEventListener("keypress", function(event) {
-    if (event.key === "Enter") {
-      event.preventDefault(); // Prevent default form submission if it were in a form
-      sendMessage();
-    }
+  })
+  .catch(err => {
+    console.error("Error generating report:", err);
+    alert("Error generating report.");
   });
+}
 </script>
-  </body>
+</body>
 </html>

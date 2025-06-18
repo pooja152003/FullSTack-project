@@ -8,7 +8,7 @@
   /* Font */
   @font-face {
     font-family: 'CustomFont';
-    src: url('./images/bold.ttf') format('truetype');
+    src: url('./fonts/bold.ttf') format('truetype');
   }
   
   /* Body and General Styles */
