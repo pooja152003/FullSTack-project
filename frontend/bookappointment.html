@@ -5,30 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Book Appointment</title>
   <link rel="stylesheet" href="css/appointments.css">
-  
 </head>
 <body>
-  <nav class="navbar">
-    <div class="logo">
-      <img src="images/logo.jpg"/>
-      <h1>OasIs
-      <span>Medicity</span></h1>
-    </div>
-    <ul class="nav-links">
-      <li><a href="index.html">HOME</a></li>
-      <li><a href="about.html">ABOUT</a></li>
-      <li><a href="contact.html">CONTACT</a></li>
-    </ul>
-  </nav>
   <div class="main">
+    <nav class="navbar">
+      <div class="logo">
+        <img src="images/logo.jpg"/>
+        <span>OasIs</span>
+        <span>Medicity</span>
+      </div>
+      <div class="hamburger">☰</div>
+      <ul class="nav-links">
+        <li><a href="index.html">HOME</a></li>
+        <li><a href="about.html">ABOUT</a></li>
+        <li><a href="contact.html">CONTACT</a></li>
+      </ul>
+    </nav>
     <div class="content">
       <h1>Book an <br><span>Appointment</span> <br>Now !!!</h1>
       <form id="appointmentForm" class="form">
-        <h2>Book Appointment</h2>
-        <div class="form-group">
-          <label for="username">Your Username</label>
-          <input type="text" id="username" required placeholder="Enter your username">
-        </div>
+        <h2>Doctor Appointment</h2>
         <div class="form-group">
           <label for="doctorSelect">Doctor</label>
           <select id="doctorSelect" required>
@@ -36,12 +32,39 @@
           </select>
         </div>
         <div class="form-group">
-          <label for="slotSelect">Available Slot</label>
+          <label for="slotSelect">Available Time Slot</label>
           <select id="slotSelect" required>
-            <option value="">-- Select a Slot --</option>
+            <option value="">-- Select a Time Slot --</option>
           </select>
         </div>
-        <button type="submit">Book Appointment</button>
+        <div class="form-group">
+          <label for="patientName">Full Name</label>
+          <input type="text" id="patientName" required placeholder="Enter your full name">
+        </div>
+        <div class="form-group">
+          <label for="patientEmail">Email</label>
+          <input type="email" id="patientEmail" required placeholder="Enter your email">
+        </div>
+        <div class="form-group">
+          <label for="patientPhone">Phone Number</label>
+          <input type="tel" id="patientPhone" required placeholder="Enter your phone number">
+        </div>
+        <div class="form-group">
+          <label for="appointmentDate">Appointment Date</label>
+          <input type="date" id="appointmentDate" required>
+        </div>
+        <div class="form-group">
+          <label for="reason">Reason for Visit</label>
+          <select id="reason" required>
+            <option value="">Select a reason for visit</option>
+            <option value="consultation">Consultation</option>
+            <option value="follow-up">Follow-up Visit</option>
+            <option value="checkup">Routine Checkup</option>
+            <option value="emergency">Emergency</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <button type="submit" id="bookAppointmentBtn">Book Appointment</button>
       </form>
       <div id="popup" style="display:none;">
         <div style="background: rgba(0, 0, 0, 0.5); position: fixed; top: 0; left: 0; width: 100%; height: 100%;"></div>
@@ -116,70 +139,48 @@
     // Book appointment
     document.getElementById('appointmentForm').addEventListener('submit', async function(event) {
       event.preventDefault();
-      const username = document.getElementById('username').value.trim();
       const doctor_id = document.getElementById('doctorSelect').value;
       const schedule_id = document.getElementById('slotSelect').value;
+      const appointment_date = document.getElementById('appointmentDate').value;
+      const patient_name = document.getElementById('patientName').value;
+      const patient_email = document.getElementById('patientEmail').value;
+      const patient_phone = document.getElementById('patientPhone').value;
+      const appointment_time = document.getElementById('slotSelect').selectedOptions[0]
+        ? document.getElementById('slotSelect').selectedOptions[0].textContent.split(' ')[1]
+        : '';
+      const notes = document.getElementById('reason').value;
 
-      if (!username || !doctor_id || !schedule_id) {
-        showPopup('Please fill all fields.');
+      // Optionally: get patient_id from session/localStorage if logged in, else use patient_name/email/phone
+      // For demo, we'll POST patient info as well
+      if (!doctor_id || !schedule_id || !appointment_date || !appointment_time) {
+        showPopup('Please fill all required fields and select a time slot.');
         return;
       }
 
-      // Get patient_id by username
-      let patient_id = null;
-      try {
-        const userRes = await fetch(`http://localhost:3000/api/users?username=${encodeURIComponent(username)}`);
-        const users = await userRes.json();
-        if (Array.isArray(users) && users.length > 0) {
-          patient_id = users[0].id;
-        } else {
-          showPopup('Username not found. Please register first.');
-          return;
-        }
-      } catch (err) {
-        showPopup('Error finding user.');
-        return;
-      }
-      // Get slot info for date/time
-      let slotInfo = null;
-      try {
-        const slotRes = await fetch('http://localhost:3000/api/doctor-schedules/' + schedule_id);
-        slotInfo = await slotRes.json();
-      } catch (err) {
-        showPopup('Error loading slot info.');
-        return;
-      }
-
-      // Book appointment
       try {
         const res = await fetch('http://localhost:3000/api/appointments', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            patient_id,
+            // If you have patient_id from login, use it here
+            patient_name,
+            patient_email,
+            patient_phone,
             doctor_id,
             schedule_id,
-            appointment_date: new Date().toISOString().split('T')[0], // today
-            appointment_time: slotInfo.start_time,
-            notes: ''
+            appointment_date,
+            appointment_time,
+            notes
           })
         });
         const data = await res.json();
         if (res.ok) {
           showPopup('Appointment booked successfully!');
           document.getElementById('appointmentForm').reset();
-          document.getElementById('slotSelect').innerHTML = '<option value="">-- Select a Slot --</option>';
+          document.getElementById('slotSelect').innerHTML = '<option value="">-- Select a Time Slot --</option>';
         } else {
           showPopup(data.error || 'Failed to book appointment.');
         }
       } catch (err) {
         showPopup('Network error. Please try again later.');
       }
-    });
-    // Load doctors on page load
-    window.onload = function() {
-      loadDoctors();
-    }
-  </script>
-</body>
-</html>

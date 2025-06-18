@@ -1,444 +1,858 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Admin Dashboard</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <link rel="stylesheet" href="css/admindashboard.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="css/admindashboard.css">
+    <style>
+        /* Additional CSS for messages and appointment table, integrate with your admindashboard.css as needed */
+        .form-message {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        .form-message.success {
+            background-color: #d4edda;
+            color: #155724;
+            border-color: #c3e6cb;
+        }
+        .form-message.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border-color: #f5c6cb;
+        }
+
+        .appointments-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .appointments-table th, .appointments-table td {
+            border: 1px solid var(--border-color); /* Using your CSS variable */
+            padding: 10px;
+            text-align: left;
+            font-size: 0.9rem;
+        }
+        .appointments-table th {
+            background-color: #f2f4f8; /* From your CSS */
+            font-weight: bold;
+        }
+        .appointments-table tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .appointments-table tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+        .appointments-table .actions button {
+            padding: 5px 10px;
+            margin-right: 5px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            min-width: 80px; /* Ensure buttons have consistent width */
+        }
+        .appointments-table .actions .approve {
+            background-color: var(--success);
+            color: white;
+        }
+        .appointments-table .actions .reject {
+            background-color: var(--danger);
+            color: white;
+        }
+        .appointments-table .actions .reschedule {
+            background-color: var(--warning);
+            color: var(--dark);
+        }
+        .appointments-table .actions button:hover {
+            opacity: 0.9;
+        }
+        #noAppointmentsMessage {
+            text-align: center;
+            padding: 20px;
+            color: var(--secondary);
+            font-style: italic;
+        }
+        .appointment-status {
+            font-weight: bold;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            text-transform: capitalize;
+        }
+        .appointment-status.pending { background-color: #ffeeba; color: #856404; }
+        .appointment-status.confirmed { background-color: #d4edda; color: #155724; }
+        .appointment-status.completed { background-color: #d1ecf1; color: #0c5460; }
+        .appointment-status.cancelled { background-color: #f8d7da; color: #721c24; }
+        .appointment-status.rescheduled { background-color: #fff3cd; color: #856404; }
+
+
+    </style>
 </head>
 <body>
-  <div class="dashboard-wrapper">
-    <aside class="sidebar" id="sidebar">
-      <a href="#" class="sidebar-brand">
-        <i class="fas fa-hospital"></i>
-        <span>Admin Panel</span>
-      </a>
-      
-      <div class="sidebar-divider"></div>
-      
-      <div class="sidebar-heading">Core</div>
-      
-      <ul class="nav-links">
-        <li class="nav-item">
-          <a href="#" class="nav-link active">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Dashboard</span>
-          </a>
-        </li>
-      </ul>
-      
-      <div class="sidebar-divider"></div>
-      
-      <div class="sidebar-heading">Management</div>
-      
-      <ul class="nav-links">
-        <li class="nav-item">
-          <a href="#users-section" class="nav-link">
-            <i class="fas fa-fw fa-users"></i>
-            <span>Users</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="#doctors-section" class="nav-link">
-            <i class="fas fa-fw fa-user-md"></i>
-            <span>Doctors</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="#schedules-section" class="nav-link">
-            <i class="fas fa-fw fa-calendar-alt"></i>
-            <span>Schedules</span>
-          </a>
-        </li>
-      </ul>
-    </aside>
-    
-    <main class="main-content" id="content">
-      <nav class="topbar">
-        <button id="sidebarToggle" class="topbar-toggle">
-          <i class="fa fa-bars"></i>
-        </button>
-        
-        <div class="user-profile-dropdown">
-          <img src="https://source.unsplash.com/QAB-WJcbgJk/60x60" alt="User Avatar" class="user-avatar">
-          <span class="user-name">Admin User</span>
-          <i class="fas fa-angle-down user-dropdown-icon"></i>
-        </div>
-      </nav>
-      
-      <div class="page-content">
-        <header class="page-header">
-          <h1 class="page-title">Dashboard Overview</h1>
-        </header>
-        
-        <section class="stats-grid">
-          <div class="stat-card stat-card-primary">
-            <div class="stat-content">
-              <div class="stat-title">Total Users</div>
-              <div class="stat-value" id="total-users">0</div>
-            </div>
-            <i class="fas fa-users stat-icon"></i>
-          </div>
-          
-          <div class="stat-card stat-card-success">
-            <div class="stat-content">
-              <div class="stat-title">Active Doctors</div>
-              <div class="stat-value" id="total-doctors">0</div>
-            </div>
-            <i class="fas fa-user-md stat-icon"></i>
-          </div>
-          
-          <div class="stat-card stat-card-info">
-            <div class="stat-content">
-              <div class="stat-title">Today's Appointments</div>
-              <div class="stat-value" id="total-appointments">0</div>
-            </div>
-            <i class="fas fa-calendar-check stat-icon"></i>
-          </div>
-          
-          <div class="stat-card stat-card-warning">
-            <div class="stat-content">
-              <div class="stat-title">Pending Requests</div>
-              <div class="stat-value" id="pending-requests">0</div>
-            </div>
-            <i class="fas fa-comments stat-icon"></i>
-          </div>
-        </section>
-        
-        <section class="card-section" id="users-section">
-          <div class="card-header">
-            <h2 class="card-title">User Management</h2>
-            <button class="btn btn-primary btn-sm" onclick="showAddUserModal()">
-              <i class="fas fa-plus"></i> Add User
-            </button>
-          </div>
-          <div class="card-body">
-            <div class="table-responsive">
-              <table class="data-table" id="userTable">
-                <thead>
-                  <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Username</th>
-                    <th>Email</th>
-                    <th>Role</th>
-                    <th>Actions</th>
-                  </tr>
-                </thead>
-                <tbody></tbody>
-              </table>
-            </div>
-          </div>
-        </section>
-        
-        <section class="card-section" id="schedules-section">
-          <div class="card-header">
-            <h2 class="card-title">Doctor Schedules</h2>
-            <button class="btn btn-primary btn-sm" onclick="showAddScheduleModal()">
-              <i class="fas fa-plus"></i> Add Schedule
-            </button>
-          </div>
-          <div class="card-body">
-            <div class="table-responsive">
-              <table class="data-table" id="scheduleTable">
-                <thead>
-                  <tr>
-                    <th>ID</th>
-                    <th>Doctor</th>
-                    <th>Department</th>
-                    <th>Schedule Time</th>
-                    <th>Actions</th>
-                  </tr>
-                </thead>
-                <tbody></tbody>
-              </table>
-            </div>
-          </div>
-        </section>
-      </div>
-    </main>
-  </div>
-  
-  <div class="modal" id="addUserModal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2>Add New User</h2>
-        <span class="close-button" onclick="closeModal('addUserModal')">&times;</span>
-      </div>
-      <div class="modal-body">
-        <form id="userForm">
-          <div class="form-group">
-            <label for="name">Full Name</label>
-            <input type="text" id="name" placeholder="Full Name" required>
-          </div>
-          <div class="form-group">
-            <label for="username">Username</label>
-            <input type="text" id="username" placeholder="Username" required>
-          </div>
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" placeholder="Email" required>
-          </div>
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" id="password" placeholder="Password" required>
-          </div>
-          <div class="form-group">
-            <label for="role">Role</label>
-            <select id="role" required>
-              <option value="">Select Role</option>
-              <option value="patient">Patient</option>
-              <option value="admin">Admin</option>
-              <option value="doctor">Doctor</option>
-              <option value="staff">Staff</option>
-            </select>
-          </div>
-          <div id="user-message" class="form-message"></div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" onclick="closeModal('addUserModal')">Cancel</button>
-            <button type="submit" class="btn btn-primary">Add User</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-  
-  <div class="modal" id="addScheduleModal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2>Add Doctor Schedule</h2>
-        <span class="close-button" onclick="closeModal('addScheduleModal')">&times;</span>
-      </div>
-      <div class="modal-body">
-        <form id="doctorScheduleForm">
-          <div class="form-group">
-            <label for="doctor">Doctor Name</label>
-            <input type="text" id="doctor" placeholder="Doctor Name" required>
-          </div>
-          <div class="form-group">
-            <label for="department">Department</label>
-            <input type="text" id="department" placeholder="Department" required>
-          </div>
-          <div class="form-group">
-            <label for="schedule_time">Schedule Time</label>
-            <input type="text" id="schedule_time" placeholder="Schedule Time (e.g., Mon 9-12 AM)" required>
-          </div>
-          <div id="schedule-message" class="form-message"></div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" onclick="closeModal('addScheduleModal')">Cancel</button>
-            <button type="submit" class="btn btn-primary">Add Schedule</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
+    <div class="dashboard-wrapper">
+        <aside class="sidebar" id="sidebar">
+            <a href="#" class="sidebar-brand">
+                <span>Admin Panel</span>
+            </a>
 
-  <script>
-    // Toggle sidebar on mobile
-    document.getElementById('sidebarToggle').addEventListener('click', function() {
-      document.getElementById('sidebar').classList.toggle('active');
-      document.getElementById('content').classList.toggle('active');
-    });
-    
-    // Modal functions
-    function showAddUserModal() {
-      document.getElementById('addUserModal').style.display = 'flex';
-    }
-    
-    function showAddScheduleModal() {
-      document.getElementById('addScheduleModal').style.display = 'flex';
-    }
-    
-    function closeModal(modalId) {
-      document.getElementById(modalId).style.display = 'none';
-    }
-    
-    // Close modal when clicking outside
-    window.onclick = function(event) {
-      if (event.target.classList.contains('modal')) {
-        event.target.style.display = 'none';
-      }
-    }
-    
-    // User Form Submission
-    document.getElementById('userForm').addEventListener('submit', async function(e) {
-      e.preventDefault();
-      const name = document.getElementById('name').value;
-      const username = document.getElementById('username').value;
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
-      const role = document.getElementById('role').value;
-      const msg = document.getElementById('user-message');
-      
-      // Clear previous messages
-      msg.innerHTML = '';
-      
-      try {
-        const res = await fetch('http://localhost:3000/api/users/register', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ name, username, email, password, role })
+            <div class="sidebar-divider"></div>
+
+            <div class="sidebar-heading">Core</div>
+
+            <ul class="nav-links">
+                <li class="nav-item">
+                    <a href="#" class="nav-link active">
+                        <i class="fas fa-fw fa-tachometer-alt"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+            </ul>
+
+            <div class="sidebar-divider"></div>
+
+            <div class="sidebar-heading">Management</div>
+
+            <ul class="nav-links">
+                <li class="nav-item">
+                    <a href="#users-section" class="nav-link">
+                        <i class="fas fa-fw fa-users"></i>
+                        <span>Users</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#schedules-section" class="nav-link">
+                        <i class="fas fa-fw fa-calendar-alt"></i>
+                        <span>Schedules</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#appointments-section" class="nav-link">
+                        <i class="fas fa-fw fa-calendar-check"></i>
+                        <span>Appointments</span>
+                    </a>
+                </li>
+            </ul>
+             <div class="sidebar-divider"></div>
+            <ul class="nav-links">
+                <li class="nav-item">
+                    <a href="#" class="nav-link" onclick="logout()">
+                        <i class="fas fa-fw fa-sign-out-alt"></i>
+                        <span>Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <main class="main-content" id="content">
+            <nav class="topbar">
+                <button id="sidebarToggle" class="topbar-toggle">
+                    <i class="fa fa-bars"></i>
+                </button>
+
+                <div class="user">
+                    <div class="logo">
+                        <img src="images/logo.jpg" alt="Oasis Medicity Logo"/>
+                        <span>OasIs</span>
+                        <span>Medicity</span>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="page-content">
+                <header class="page-header">
+                    <h1 class="page-title">Dashboard Overview</h1>
+                </header>
+
+                <section class="stats-grid">
+                    <div class="stat-card stat-card-primary">
+                        <div class="stat-content">
+                            <div class="stat-title">Total Users</div>
+                            <div class="stat-value" id="total-users">0</div>
+                        </div>
+                        <i class="fas fa-users stat-icon"></i>
+                    </div>
+
+                    <div class="stat-card stat-card-success">
+                        <div class="stat-content">
+                            <div class="stat-title">Active Doctors</div>
+                            <div class="stat-value" id="total-doctors">0</div>
+                        </div>
+                        <i class="fas fa-user-md stat-icon"></i>
+                    </div>
+
+                    <div class="stat-card stat-card-info">
+                        <div class="stat-content">
+                            <div class="stat-title">Today's Appointments</div>
+                            <div class="stat-value" id="total-appointments">0</div>
+                        </div>
+                        <i class="fas fa-calendar-check stat-icon"></i>
+                    </div>
+
+                    <div class="stat-card stat-card-warning">
+                        <div class="stat-content">
+                            <div class="stat-title">Pending Requests</div>
+                            <div class="stat-value" id="pending-requests">0</div>
+                        </div>
+                        <i class="fas fa-comments stat-icon"></i>
+                    </div>
+                </section>
+
+                <section class="card-section" id="users-section">
+                    <div class="card-header">
+                        <h2 class="card-title">User Management</h2>
+                        <button class="btn btn-primary btn-sm" onclick="showAddUserModal()">
+                            <i class="fas fa-plus"></i> Add User
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="data-table" id="userTable">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Name</th>
+                                        <th>Username</th>
+                                        <th>Email</th>
+                                        <th>Role</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="card-section" id="schedules-section">
+                    <div class="card-header">
+                        <h2 class="card-title">Doctor Schedules</h2>
+                        <button class="btn btn-primary btn-sm" onclick="showAddScheduleModal()">
+                            <i class="fas fa-plus"></i> Add Schedule
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="data-table" id="scheduleTable">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Doctor</th>
+                                        <th>Day</th>
+                                        <th>Time</th>
+                                        <th>Duration</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="card-section" id="appointments-section">
+                    <div class="card-header">
+                        <h2 class="card-title">Manage Appointment Requests</h2>
+                    </div>
+                    <div class="card-body">
+                        <div id="noAppointmentsMessage">No pending appointment requests.</div>
+                        <div class="table-responsive">
+                            <table class="data-table appointments-table" id="pendingAppointmentsTable" style="display:none;">
+                                <thead>
+                                    <tr>
+                                        <th>Patient</th>
+                                        <th>Doctor</th>
+                                        <th>Date</th>
+                                        <th>Time</th>
+                                        <th>Reason</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="appointmentsTableBody">
+                                    </tbody>
+                            </table>
+                        </div>
+                        <div id="appointmentActionMessage" class="form-message"></div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <div class="modal" id="addUserModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add New User</h2>
+                <span class="close-button" onclick="closeModal('addUserModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="userForm">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" placeholder="Full Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" placeholder="Username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" placeholder="Email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" placeholder="Password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="role">Role</label>
+                        <select id="role" required>
+                            <option value="">Select Role</option>
+                            <option value="patient">Patient</option>
+                            <option value="admin">Admin</option>
+                            <option value="doctor">Doctor</option>
+                        </select>
+                        <div id="specialtyField" style="display:none;">
+    <select id="speciality" placeholder="Specialty">
+                            <option value="">Select Specialty</option>
+                            <option value="patient">Patient</option>
+                            <option value="admin">Admin</option>
+                            <option value="doctor">Doctor</option>
+                            <option value="Cardiology">Cardiology</option>
+                            <option value="Neurology">Neurology</option>
+                            <option value="Orthopedics">Orthopedics</option>
+                            <option value="Gynecology">Gynecology</option>
+                            <option value="Ophthalmology">Ophthalmology</option>
+                            <option value="Pediatrics">Pediatrics</option>
+                            <option value="ENT">ENT</option>
+                            <option value="Pulmonology">Pulmonology</option>
+                            <option value="Gastroenterology">Gastroenterology</option>
+                            <option value="Psychiatry">Psychiatry</option>
+                            <option value="Urology">Urology </option>
+                            <option value="Dermatology">Dermatology">
+                        </select>
+  </div>
+                    </div>
+                    <div id="user-message" class="form-message"></div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" onclick="closeModal('addUserModal')">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Add User</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="addScheduleModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add Doctor Schedule</h2>
+                <span class="close-button" onclick="closeModal('addScheduleModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="doctorScheduleForm">
+                    <div class="form-group">
+                        <label for="scheduleDoctor">Doctor:</label>
+                        <select id="scheduleDoctor" name="doctor_id" required>
+                            <option value="">Select a Doctor</option>
+                            </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="scheduleDay">Day of Week:</label>
+                        <select id="scheduleDay" name="day_of_week" required>
+                            <option value="">Select Day</option>
+                            <option value="Monday">Monday</option>
+                            <option value="Tuesday">Tuesday</option>
+                            <option value="Wednesday">Wednesday</option>
+                            <option value="Thursday">Thursday</option>
+                            <option value="Friday">Friday</option>
+                            <option value="Saturday">Saturday</option>
+                            <option value="Sunday">Sunday</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="scheduleStartTime">Start Time:</label>
+                        <input type="time" id="scheduleStartTime" name="start_time" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="scheduleEndTime">End Time:</label>
+                        <input type="time" id="scheduleEndTime" name="end_time" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="scheduleDuration">Appointment Duration (minutes):</label>
+                        <input type="number" id="scheduleDuration" name="duration_minutes" value="30" min="5" required>
+                    </div>
+                    <div id="schedule-message" class="form-message"></div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" onclick="closeModal('addScheduleModal')">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Add Schedule</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+<footer>
+    <p>&copy; 2025 Hospital Website | All Rights Reserved</p>
+  </footer>
+    <script>
+        // --- Core UI Functions ---
+        document.getElementById('sidebarToggle').addEventListener('click', function() {
+            document.getElementById('sidebar').classList.toggle('active');
+            document.getElementById('content').classList.toggle('active');
+        });
+
+        function showAddUserModal() {
+            document.getElementById('addUserModal').style.display = 'flex';
+        }
+
+        function showAddScheduleModal() {
+            document.getElementById('addScheduleModal').style.display = 'flex';
+            loadDoctorsForSchedule(); // Load doctors when schedule modal opens
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+            // Clear any messages when closing a modal
+            const messageDiv = document.querySelector(`#${modalId} .form-message`);
+            if (messageDiv) {
+                messageDiv.innerHTML = '';
+                messageDiv.className = 'form-message';
+            }
+        }
+
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+                // Clear messages if modal is closed by clicking outside
+                const modalId = event.target.id;
+                const messageDiv = document.querySelector(`#${modalId} .form-message`);
+                if (messageDiv) {
+                    messageDiv.innerHTML = '';
+                    messageDiv.className = 'form-message';
+                }
+            }
+        }
+
+        // --- User Management ---
+        document.getElementById('userForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const role = document.getElementById('role').value;
+let body = {
+  name: document.getElementById('name').value,
+  username: document.getElementById('username').value,
+  email: document.getElementById('email').value,
+  password: document.getElementById('password').value,
+  role: role
+};
+if (role === 'doctor') {
+  body.specialty = document.getElementById('specialty').value;
+}
+            const msg = document.getElementById('user-message');
+
+            msg.innerHTML = '';
+
+            try {
+                const res = await fetch('http://localhost:3000/api/users/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(body)
+                });
+
+                const data = await res.json();
+
+                if (res.ok) {
+                    msg.innerHTML = `<div class="alert alert-success">User added successfully!</div>`;
+                    msg.classList.remove('alert-danger');
+                    msg.classList.add('alert-success');
+                    loadUsers();
+                    updateStats();
+                    setTimeout(() => {
+                        closeModal('addUserModal');
+                        document.getElementById('userForm').reset();
+                    }, 1500);
+                } else {
+                    msg.innerHTML = `<div class="alert alert-danger">${data.error || "Failed to add user"}</div>`;
+                    msg.classList.remove('alert-success');
+                    msg.classList.add('alert-danger');
+                }
+            } catch (err) {
+                msg.innerHTML = `<div class="alert alert-danger">Network error: ${err.message}</div>`;
+                msg.classList.remove('alert-success');
+                msg.classList.add('alert-danger');
+            }
+        });
+
+        // --- Doctor Schedule Management ---
+        async function loadDoctorsForSchedule() {
+            const selectElement = document.getElementById('scheduleDoctor');
+            selectElement.innerHTML = '<option value="">Select a Doctor</option>'; // Clear existing options
+            try {
+                // Assuming your /api/users endpoint can filter by role
+                const response = await fetch('http://localhost:3000/api/users?role=doctor');
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const doctors = await response.json();
+
+                if (doctors.length === 0) {
+                     const option = document.createElement('option');
+                    option.value = '';
+                    option.textContent = 'No doctors available';
+                    option.disabled = true;
+                    selectElement.appendChild(option);
+                    return;
+                }
+
+                doctors.forEach(doctor => {
+                    const option = document.createElement('option');
+                    option.value = doctor.id; // doctor.id should be the user_id for the doctor_profiles table
+                    option.textContent = doctor.name;
+                    selectElement.appendChild(option);
+                });
+            } catch (error) {
+                console.error('Error loading doctors for schedule:', error);
+                const msg = document.getElementById('schedule-message');
+                msg.innerHTML = `<div class="alert alert-danger">Failed to load doctors.</div>`;
+                msg.classList.add('alert-danger');
+            }
+        }
+
+        document.getElementById('doctorScheduleForm').addEventListener('submit',async function(e) {
+            e.preventDefault(); // Prevents double submission
+            const doctor_id = document.getElementById('scheduleDoctor').value;
+            const day_of_week = document.getElementById('scheduleDay').value;
+            const start_time = document.getElementById('scheduleStartTime').value;
+            const end_time = document.getElementById('scheduleEndTime').value;
+            const duration_minutes = parseInt(document.getElementById('scheduleDuration').value, 10);
+            const msg = document.getElementById('schedule-message');
+            
+            // // Clear previous messages
+            // msg.innerHTML = '';
+            
+            try {
+                const res = await fetch('http://localhost:3000/api/doctor-schedules', { // Use doctor-schedules endpoint
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ doctor_id, day_of_week, start_time, end_time, duration_minutes })
+                });
+                
+                const data = await res.json();
+                
+                if (res.ok) {
+                    msg.innerHTML = `<div class="alert alert-success">Schedule added successfully!</div>`;
+                    msg.classList.remove('alert-danger');
+                    msg.classList.add('alert-success');
+                    loadSchedules();
+                    updateStats();
+                    setTimeout(() => {
+                        closeModal('addScheduleModal');
+                        document.getElementById('doctorScheduleForm').reset();
+                    }, 1500);
+                } else {
+                    msg.innerHTML = `<div class="alert alert-danger">${data.error || "Failed to add schedule"}</div>`;
+                    msg.classList.remove('alert-success');
+                    msg.classList.add('alert-danger');
+                }
+            } catch (err) {
+                console.error('Error adding schedule:', err);
+                msg.innerHTML = `<div class="alert alert-danger">Network error: ${err.message}</div>`;
+                msg.classList.remove('alert-success');
+                msg.classList.add('alert-danger');
+            }
         });
         
-        const data = await res.json();
-        
-        if (res.ok) {
-          msg.innerHTML = `<div class="alert alert-success">User added successfully!</div>`;
-          loadUsers();
-          updateStats();
-          setTimeout(() => {
-            closeModal('addUserModal');
-            document.getElementById('userForm').reset();
-          }, 1500);
-        } else {
-          msg.innerHTML = `<div class="alert alert-danger">${data.error || "Failed to add user"}</div>`;
-        }
-      } catch (err) {
-        msg.innerHTML = `<div class="alert alert-danger">Network error: ${err.message}</div>`;
-      }
-    });
-    
-    // Doctor Schedule Form Submission
-    document.getElementById('doctorScheduleForm').addEventListener('submit', async function(e) {
-      e.preventDefault();
-      const doctor = document.getElementById('doctor').value;
-      const department = document.getElementById('department').value;
-      const schedule_time = document.getElementById('schedule_time').value;
-      const msg = document.getElementById('schedule-message');
-      
-      // Clear previous messages
-      msg.innerHTML = '';
-      
-      try {
-        const res = await fetch('http://localhost:3000/api/doctor-schedule', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ doctor, department, schedule_time })
-        });
-        
-        const data = await res.json();
-        
-        if (res.ok) {
-          msg.innerHTML = `<div class="alert alert-success">Schedule added successfully!</div>`;
-          loadSchedules();
-          updateStats();
-          setTimeout(() => {
-            closeModal('addScheduleModal');
-            document.getElementById('doctorScheduleForm').reset();
-          }, 1500);
-        } else {
-          msg.innerHTML = `<div class="alert alert-danger">${data.error || "Failed to add schedule"}</div>`;
-        }
-      } catch (err) {
-        msg.innerHTML = `<div class="alert alert-danger">Network error: ${err.message}</div>`;
-      }
-    });
-    
-    // Load Users
-    async function loadUsers() {
-      const tbody = document.querySelector('#userTable tbody');
-      tbody.innerHTML = '<tr><td colspan="6" class="text-center">Loading users...</td></tr>';
-      
-      try {
-        const res = await fetch('http://localhost:3000/api/users');
-        const data = await res.json();
-        
-        if (data.length === 0) {
-          tbody.innerHTML = '<tr><td colspan="6" class="text-center">No users found.</td></tr>';
-          return;
+        // Load Users
+        async function loadUsers() {
+            const tbody = document.querySelector('#userTable tbody');
+            tbody.innerHTML = '<tr><td colspan="6" class="text-center">Loading users...</td></tr>';
+            
+            try {
+                const res = await fetch('http://localhost:3000/api/users');
+                const data = await res.json();
+                
+                if (data.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="6" class="text-center">No users found.</td></tr>';
+                    return;
+                }
+                
+                tbody.innerHTML = '';
+                data.forEach(row => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td>${row.id}</td>
+                        <td>${row.name}</td>
+                        <td>${row.username}</td>
+                        <td>${row.email}</td>
+                        <td><span class="badge ${getRoleBadgeClass(row.role)}">${row.role}</span></td>
+                        <td>
+                            <button class="btn btn-sm btn-danger delete-btn" onclick="deleteUser('${row.id}')"><i class="fas fa-trash"></i></button>
+                        </td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            } catch (err) {
+                console.error("Error loading users:", err);
+                tbody.innerHTML = '<tr><td colspan="6" class="text-center text-danger">Error loading users. Please try again.</td></tr>';
+            }
         }
         
+        // Placeholder for Delete User (requires backend DELETE endpoint)
+        async function deleteUser(userId) {
+            if (!confirm(`Are you sure you want to delete user with ID: ${userId}?`)) {
+                return;
+            }
+            try {
+                const res = await fetch(`http://localhost:3000/api/users/${userId}`, {
+                    method: 'DELETE',
+                    headers: { 'Content-Type': 'application/json' }
+                });
+
+                if (res.ok) {
+                    alert('User deleted successfully!');
+                    loadUsers(); // Reload table
+                    updateStats(); // Update stats if user count changes
+                } else {
+                    const data = await res.json();
+                    alert(`Failed to delete user: ${data.error || res.statusText}`);
+                }
+            } catch (error) {
+                console.error('Error deleting user:', error);
+                alert('An error occurred while deleting the user.');
+            }
+        }    
+async function loadSchedules() {
+    const tbody = document.querySelector('#scheduleTable tbody');
+    tbody.innerHTML = '<tr><td colspan="6" class="text-center">Loading schedules...</td></tr>';
+    try {
+        const res = await fetch('http://localhost:3000/api/doctor-schedules');
+        const data = await res.json();
+
+        if (!Array.isArray(data) || data.length === 0) {
+            tbody.innerHTML = '<tr><td colspan="6" class="text-center">No schedules found.</td></tr>';
+            return;
+        }
+
         tbody.innerHTML = '';
         data.forEach(row => {
-          const tr = document.createElement('tr');
-          tr.innerHTML = `
-            <td>${row.id}</td>
-            <td>${row.name}</td>
-            <td>${row.username}</td>
-            <td>${row.email}</td>
-            <td><span class="badge ${getRoleBadgeClass(row.role)}">${row.role}</span></td>
-            <td>
-              <button class="btn btn-sm btn-info edit-btn"><i class="fas fa-edit"></i></button>
-              <button class="btn btn-sm btn-danger delete-btn"><i class="fas fa-trash"></i></button>
-            </td>
-          `;
-          tbody.appendChild(tr);
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${row.id}</td>
+                <td>${row.doctor_name || 'N/A'}</td>
+                <td>${row.specialty || 'N/A'}</td>
+                <td>${row.day_of_week} ${row.start_time} - ${row.end_time}</td>
+                <td>${row.duration_minutes} mins</td>
+                <td>
+                    <button class="btn btn-sm btn-danger delete-btn" onclick="deleteSchedule('${row.id}')"><i class="fas fa-trash"></i></button>
+                </td>
+            `;
+            tbody.appendChild(tr);
         });
-      } catch (err) {
-        tbody.innerHTML = '<tr><td colspan="6" class="text-center text-danger">Error loading users. Please try again.</td></tr>';
-      }
+    } catch (err) {
+        console.error('Error loading schedules:', err);
+        tbody.innerHTML = '<tr><td colspan="6" class="text-center text-danger">Error loading schedules. Please try again.</td></tr>';
     }
-    
-    // Load Doctor Schedules
-    async function loadSchedules() {
-      const tbody = document.querySelector('#scheduleTable tbody');
-      tbody.innerHTML = '<tr><td colspan="5" class="text-center">Loading schedules...</td></tr>';
-      
-      try {
-        const res = await fetch('http://localhost:3000/api/doctor-schedule');
-        const data = await res.json();
-        
-        if (data.length === 0) {
-          tbody.innerHTML = '<tr><td colspan="5" class="text-center">No schedules found.</td></tr>';
-          return;
+}
+        // Placeholder for Delete Schedule (requires backend DELETE endpoint)
+        async function deleteSchedule(scheduleId) {
+            if (!confirm(`Are you sure you want to delete schedule with ID: ${scheduleId}?`)) {
+                return;
+            }
+            try {
+                const res = await fetch(`http://localhost:3000/api/doctor-schedules/${scheduleId}`, {
+                    method: 'DELETE',
+                    headers: { 'Content-Type': 'application/json' }
+                });
+
+                if (res.ok) {
+                    alert('Schedule deleted successfully!');
+                    loadSchedules();
+                    updateStats();
+                } else {
+                    const data = await res.json();
+                    alert(`Failed to delete schedule: ${data.error || res.statusText}`);
+                }
+            } catch (error) {
+                console.error('Error deleting schedule:', error);
+                alert('An error occurred while deleting the schedule.');
+            }
         }
-        
-        tbody.innerHTML = '';
-        data.forEach(row => {
-          const tr = document.createElement('tr');
-          tr.innerHTML = `
-            <td>${row.id}</td>
-            <td>${row.doctor}</td>
-            <td>${row.department}</td>
-            <td>${row.schedule_time}</td>
-            <td>
-              <button class="btn btn-sm btn-info edit-btn"><i class="fas fa-edit"></i></button>
-              <button class="btn btn-sm btn-danger delete-btn"><i class="fas fa-trash"></i></button>
-            </td>
-          `;
-          tbody.appendChild(tr);
+
+
+        // --- Appointment Request Management ---
+        async function loadPendingAppointments() {
+            const tableBody = document.getElementById('appointmentsTableBody');
+            const noAppointmentsMessage = document.getElementById('noAppointmentsMessage');
+            const pendingAppointmentsTable = document.getElementById('pendingAppointmentsTable');
+            tableBody.innerHTML = ''; // Clear previous entries
+            const messageDiv = document.getElementById('appointmentActionMessage');
+            messageDiv.innerHTML = '';
+            messageDiv.className = 'form-message'; // Reset classes
+
+            try {
+                const response = await fetch('http://localhost:3000/api/appointments?status=pending'); // Fetch pending appointments
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const appointments = await response.json();
+
+                if (appointments.length === 0) {
+                    noAppointmentsMessage.style.display = 'block';
+                    pendingAppointmentsTable.style.display = 'none';
+                } else {
+                    noAppointmentsMessage.style.display = 'none';
+                    pendingAppointmentsTable.style.display = 'table'; // Show table
+                    appointments.forEach(appt => {
+                        const row = tableBody.insertRow();
+                        row.dataset.appointmentId = appt.id; // Store ID for actions
+                        row.innerHTML = `
+                            <td>${appt.patient_name || 'N/A'}</td>
+                            <td>${appt.doctor_name || 'N/A'}</td>
+                            <td>${appt.appointment_date}</td>
+                            <td>${appt.appointment_time}</td>
+                            <td>${appt.notes || 'No notes'}</td>
+                            <td><span class="appointment-status ${appt.status}">${appt.status}</span></td>
+                            <td class="actions">
+                                <button class="approve btn btn-sm btn-success" data-id="${appt.id}" data-status="confirmed">Approve</button>
+                                <button class="reject btn btn-sm btn-danger" data-id="${appt.id}" data-status="cancelled">Reject</button>
+                                <button class="reschedule btn btn-sm btn-warning" data-id="${appt.id}">Reschedule</button>
+                            </td>
+                        `;
+                    });
+
+                    // Add event listeners for action buttons
+                    tableBody.querySelectorAll('button.approve').forEach(button => {
+                        button.addEventListener('click', (e) => updateAppointmentStatus(e.target.dataset.id, 'confirmed'));
+                    });
+                    tableBody.querySelectorAll('button.reject').forEach(button => {
+                        button.addEventListener('click', (e) => updateAppointmentStatus(e.target.dataset.id, 'cancelled'));
+                    });
+                     tableBody.querySelectorAll('button.reschedule').forEach(button => {
+                        button.addEventListener('click', (e) => {
+                            alert(`Rescheduling appointment ${e.target.dataset.id}. This would typically open a modal for new date/time selection.`);
+                            // Implement a modal or form here for actual rescheduling logic
+                        });
+                    });
+                }
+            } catch (error) {
+                console.error('Error loading pending appointments:', error);
+                messageDiv.innerHTML = `<div class="alert alert-danger">Failed to load appointment requests.</div>`;
+                messageDiv.classList.add('alert-danger');
+            }
+        }
+
+        async function updateAppointmentStatus(appointmentId, newStatus) {
+            const messageDiv = document.getElementById('appointmentActionMessage');
+            messageDiv.innerHTML = '';
+            messageDiv.className = 'form-message';
+
+            try {
+                const response = await fetch(`http://localhost:3000/api/appointments/${appointmentId}/status`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ status: newStatus })
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    messageDiv.innerHTML = `<div class="alert alert-success">${result.message || `Appointment ${newStatus} successfully!`}</div>`;
+                    messageDiv.classList.add('alert-success');
+                    loadPendingAppointments(); // Reload list to reflect changes
+                    updateStats(); // Update pending requests count
+                } else {
+                    messageDiv.innerHTML = `<div class="alert alert-danger">${result.error || 'Failed to update appointment status.'}</div>`;
+                    messageDiv.classList.add('alert-danger');
+                }
+            } catch (error) {
+                console.error('Error updating appointment status:', error);
+                messageDiv.innerHTML = `<div class="alert alert-danger">An error occurred while updating appointment status.</div>`;
+                messageDiv.classList.add('alert-danger');
+            }
+        }
+
+
+        // --- Dashboard Stats Update ---
+        async function updateStats() {
+            try {
+                const usersRes = await fetch('http://localhost:3000/api/users');
+                const users = await usersRes.json();
+                document.getElementById('total-users').textContent = users.length;
+
+                const doctorsRes = await fetch('http://localhost:3000/api/users?role=doctor'); // Get actual doctor count
+                const doctors = await doctorsRes.json();
+                document.getElementById('total-doctors').textContent = doctors.length;
+
+                const allAppointmentsRes = await fetch('http://localhost:3000/api/appointments');
+                const allAppointments = await allAppointmentsRes.json();
+                
+                // Filter for today's appointments (basic logic, adjust as needed)
+                const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
+                const todaysAppointments = allAppointments.filter(appt => appt.appointment_date === today);
+                document.getElementById('total-appointments').textContent = todaysAppointments.length;
+
+                const pendingAppointmentsRes = await fetch('http://localhost:3000/api/appointments?status=pending');
+                const pendingAppointments = await pendingAppointmentsRes.json();
+                document.getElementById('pending-requests').textContent = pendingAppointments.length;
+
+            } catch (err) {
+                console.error('Error updating stats:', err);
+                // Optionally display a message on the dashboard if stats fail to load
+            }
+        }
+
+        // Helper function for role badges
+        function getRoleBadgeClass(role) {
+            switch(role) {
+                case 'admin': return 'badge-danger';
+                case 'doctor': return 'badge-primary';
+                case 'staff': return 'badge-warning';
+                case 'patient': return 'badge-info'; // Added patient badge class
+                default: return 'badge-success';
+            }
+        }
+
+        // // Logout Function
+        async function logout() {
+            if (confirm('Are you sure you want to log out?')) {
+                try {
+                    const response = await fetch('http://localhost:3000/api/logout', { method: 'POST' });
+                    if (response.ok) {
+                        window.location.href = 'index.html'; // Or your login page
+                    } else {
+                        alert('Logout failed. Please try again.');
+                    }
+                } catch (error) {
+                    console.error('Logout error:', error);
+                    alert('An error occurred during logout.');
+                }
+            }
+        }
+
+
+        // --- Initial Load ---
+        document.addEventListener('DOMContentLoaded', function() {
+            loadUsers();
+            loadSchedules();
+            loadPendingAppointments(); // Load appointments on page load
+            updateStats();
         });
-      } catch (err) {
-        tbody.innerHTML = '<tr><td colspan="5" class="text-center text-danger">Error loading schedules. Please try again.</td></tr>';
-      }
-    }
-    
-    // Update dashboard stats
-    async function updateStats() {
-      try {
-        const usersRes = await fetch('http://localhost:3000/api/users');
-        const users = await usersRes.json();
-        document.getElementById('total-users').textContent = users.length;
         
-        const doctorsRes = await fetch('http://localhost:3000/api/doctor-schedule');
-        const doctors = await doctorsRes.json();
-        document.getElementById('total-doctors').textContent = doctors.length;
-        
-        // These values would ideally come from your actual API
-        document.getElementById('total-appointments').textContent = '12'; 
-        document.getElementById('pending-requests').textContent = '5';
-      } catch (err) {
-        console.error('Error updating stats:', err);
-      }
-    }
-    
-    // Helper function for role badges
-    function getRoleBadgeClass(role) {
-      switch(role) {
-        case 'admin': return 'badge-danger';
-        case 'doctor': return 'badge-primary';
-        case 'staff': return 'badge-warning';
-        default: return 'badge-success';
-      }
-    }
-    
-    // Initial load
-    document.addEventListener('DOMContentLoaded', function() {
-      loadUsers();
-      loadSchedules();
-      updateStats();
-    });
-  </script>
+    document.getElementById('role').addEventListener('change', function() {
+  const specialtyDiv = document.getElementById('specialtyField');
+  if (this.value === 'doctor') {
+    specialtyDiv.style.display = 'block';
+    document.getElementById('specialty').setAttribute('required', 'required');
+  } else {
+    specialtyDiv.style.display = 'none';
+    document.getElementById('specialty').removeAttribute('required');
+  }
+});
+    </script>
 </body>
 </html>
